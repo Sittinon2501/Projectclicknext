@@ -1,0 +1,46 @@
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql_banking
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: banking
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  backend:
+    build: ./backend_bank
+    container_name: backend_banking
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./backend_bank/.env
+    volumes:
+      - ./backend_bank:/app
+      - /app/node_modules
+    command: npm run dev
+
+  frontend:
+    build: ./frontend_bank
+    container_name: frontend_banking
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
+    environment:
+      - NUXT_PUBLIC_API_URL=http://backend:5000/api
+    volumes:
+      - ./frontend_bank:/app
+      - /app/node_modules
+    command: npm run dev
+
+volumes:
+  mysql_data:
