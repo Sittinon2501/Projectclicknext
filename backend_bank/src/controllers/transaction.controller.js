@@ -3,35 +3,37 @@ const Transaction = require("../models/transaction.model");
 
 exports.deposit = async (req, res) => {
   try {
-    const { accountId, amount } = req.body;
+    const { accountNumber, amount } = req.body;
     if (amount <= 0)
       return res
         .status(400)
         .json({ message: "Deposit amount must be greater than 0" });
 
-    const account = await Account.findByPk(accountId);
+    // ค้นหาบัญชีจาก accountNumber
+    const account = await Account.findOne({ where: { accountNumber } });
     if (!account) return res.status(404).json({ message: "Account not found" });
 
     account.balance += amount;
     await account.save();
 
-    await Transaction.create({ accountId, type: "deposit", amount });
+    await Transaction.create({ accountNumber, type: "deposit", amount });
 
     res.json({ message: "Deposit successful", balance: account.balance });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: error.message });
   }
 };
 
 exports.withdraw = async (req, res) => {
   try {
-    const { accountId, amount } = req.body;
+    const { accountNumber, amount } = req.body;
     if (amount <= 0)
       return res
         .status(400)
         .json({ message: "Withdraw amount must be greater than 0" });
 
-    const account = await Account.findByPk(accountId);
+    const account = await Account.findOne({ where: { accountNumber } });
     if (!account) return res.status(404).json({ message: "Account not found" });
 
     if (account.balance < amount)
@@ -40,14 +42,14 @@ exports.withdraw = async (req, res) => {
     account.balance -= amount;
     await account.save();
 
-    await Transaction.create({ accountId, type: "withdraw", amount });
+    await Transaction.create({ accountNumber, type: "withdraw", amount });
 
     res.json({ message: "Withdraw successful", balance: account.balance });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: error.message });
   }
 };
-
 exports.transfer = async (req, res) => {
   try {
     const { recipientAccountNumber, amount } = req.body;
@@ -140,27 +142,28 @@ exports.viewBalance = async (req, res) => {
   };
   
 
-exports.transactionHistory = async (req, res) => {
-  try {
-    // ดึง userId จาก Token
-    const userId = req.user.userId;
-
-    // ค้นหาบัญชีของผู้ใช้
-    const account = await Account.findOne({ where: { userId } });
-    if (!account) {
-      return res
-        .status(404)
-        .json({ message: "No account found for this user" });
+  exports.transactionHistory = async (req, res) => {
+    try {
+      // ดึง userId จาก Token
+      const userId = req.user.userId;
+  
+      // ค้นหาบัญชีของผู้ใช้
+      const account = await Account.findOne({ where: { userId } });
+      if (!account) {
+        return res
+          .status(404)
+          .json({ message: "No account found for this user" });
+      }
+  
+      // ค้นหาประวัติธุรกรรมของบัญชีนี้โดยใช้ accountNumber แทน accountId
+      const transactions = await Transaction.findAll({
+        where: { accountNumber: account.accountNumber }, // เปลี่ยนจาก accountId เป็น accountNumber
+        order: [["createdAt", "DESC"]],
+      });
+  
+      res.json({ transactions });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
     }
-
-    // ค้นหาประวัติธุรกรรมของบัญชีนี้
-    const transactions = await Transaction.findAll({
-      where: { accountId: account.id },
-      order: [["createdAt", "DESC"]],
-    });
-
-    res.json({ transactions });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
+  };
+  

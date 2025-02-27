@@ -4,10 +4,10 @@ const Account = require('./account.model');
 
 const Transaction = sequelize.define('Transaction', {
   id: { type: DataTypes.UUID, defaultValue: DataTypes.UUIDV4, primaryKey: true },
-  accountId: { 
-    type: DataTypes.UUID,
+  accountNumber: {  // เปลี่ยนจาก accountId เป็น accountNumber
+    type: DataTypes.STRING,
     allowNull: false,
-    references: { model: Account, key: 'id' }
+    references: { model: Account, key: 'accountNumber' }  // เปลี่ยนจาก 'id' เป็น 'accountNumber'
   },
   type: { 
     type: DataTypes.ENUM('deposit', 'withdraw', 'transfer'), 
@@ -21,7 +21,7 @@ const Transaction = sequelize.define('Transaction', {
   createdAt: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
 }, { timestamps: false });
 
-Account.hasMany(Transaction, { foreignKey: 'accountId' });
-Transaction.belongsTo(Account, { foreignKey: 'accountId' });
+Account.hasMany(Transaction, { foreignKey: 'accountNumber' });  // เปลี่ยนจาก 'accountId' เป็น 'accountNumber'
+Transaction.belongsTo(Account, { foreignKey: 'accountNumber' }); // เปลี่ยนจาก 'accountId' เป็น 'accountNumber'
 
 module.exports = Transaction;

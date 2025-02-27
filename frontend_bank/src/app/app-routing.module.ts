@@ -3,19 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
 import { HomeComponent } from './user/home/home.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { OpenAccountComponent } from './account/open-account/open-account.component';
 import { TransactionsComponent } from './account/transactions/transactions.component';
-import { BalanceComponent } from './account/balance/balance.component';
-import { HistoryComponent } from './account/history/history.component';
 import { DashboardComponent } from './account/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
-
-  { path: 'open-account', component: OpenAccountComponent },
   { path: 'transactions', component: TransactionsComponent },
-  { path: 'balance', component: BalanceComponent },
-  { path: 'history', component: HistoryComponent },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },

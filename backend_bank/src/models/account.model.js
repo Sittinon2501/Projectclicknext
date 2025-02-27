@@ -19,14 +19,14 @@ const Account = sequelize.define(
     accountNumber: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: true, // ต้องมีค่านี้เป็น unique เพื่อให้สามารถใช้เชื่อมโยงได้
     },
     accountName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     accountType: {
-      type: DataTypes.ENUM("savings"), // ลบ "fixed_deposit" ออก
+      type: DataTypes.ENUM("savings"),
       allowNull: false,
     },
     balance: { type: DataTypes.FLOAT, defaultValue: 0.0 },

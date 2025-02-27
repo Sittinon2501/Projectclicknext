@@ -8,7 +8,6 @@ import { LoginComponent } from './auth/login/login.component';
 import { HomeComponent } from './user/home/home.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
-import { OpenAccountComponent } from './account/open-account/open-account.component';
 import { TransactionsComponent } from './account/transactions/transactions.component';
 import { BalanceComponent } from './account/balance/balance.component';
 import { HistoryComponent } from './account/history/history.component';
@@ -20,7 +19,6 @@ import { DashboardComponent } from './account/dashboard/dashboard.component';
     LoginComponent,
     HomeComponent,
     RegisterComponent,
-    OpenAccountComponent,
     TransactionsComponent,
     BalanceComponent,
     HistoryComponent,
