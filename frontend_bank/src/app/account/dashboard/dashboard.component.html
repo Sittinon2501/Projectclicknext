@@ -1,28 +1,44 @@
-<h2>Your Dashboard</h2>
+<!-- dashboard.component.html -->
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Your Dashboard</h2>
 
-<div *ngIf="accounts.length > 0">
-  <h3>Your Bank Accounts</h3>
-  <table>
-    <tr>
-      <th>Account Number</th>
-      <th>Account Name</th>
-      <th>Type</th>
-      <th>Balance</th>
-      <th>Annual Interest</th>
-    </tr>
-    <tr *ngFor="let account of accounts">
-      <td>{{ account.accountNumber }}</td>
-      <td>{{ account.accountName }}</td>
-      <td>{{ account.accountType }}</td>
-      <td>{{ account.balance | currency }}</td>
-      <td>{{ calculateAnnualInterest(account) | currency }}</td>
-    </tr>
-  </table>
+  <!-- Your Bank Accounts Section -->
+  <div *ngIf="accounts.length > 0">
+    <h3>Your Bank Accounts</h3>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th>Account Number</th>
+            <th>Account Name</th>
+            <th>Type</th>
+            <th>Balance</th>
+            <th>Annual Interest</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let account of accounts">
+            <td>{{ account.accountNumber }}</td>
+            <td>{{ account.accountName }}</td>
+            <td>{{ account.accountType }}</td>
+            <td>{{ account.balance | currency }}</td>
+            <td>{{ calculateAnnualInterest(account) | currency }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Balance Section -->
+  <div class="my-4">
+    <app-balance></app-balance>
+  </div>
+
+  <!-- History Section -->
+  <div>
+    <app-history></app-history>
+  </div>
+
+  <!-- Message Display -->
+  <p *ngIf="message" class="alert alert-info mt-3">{{ message }}</p>
 </div>
-
-<app-balance></app-balance>
-<app-history></app-history>
-
-
-
-<p *ngIf="message">{{ message }}</p>

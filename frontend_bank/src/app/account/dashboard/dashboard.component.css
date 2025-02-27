@@ -1,0 +1,45 @@
+/* dashboard.component.css */
+
+/* Add custom styles to the table */
+.table {
+    font-size: 16px;
+  }
+  
+  .table th, .table td {
+    text-align: center;
+  }
+  
+  .table th {
+    background-color: #343a40; /* Dark header for better readability */
+    color: white;
+  }
+  
+  .table td {
+    background-color: #f8f9fa;
+  }
+  
+  /* Add custom styles for the sections */
+  h3 {
+    color: #007bff;
+    font-weight: 600;
+  }
+  
+  .app-history, .app-balance {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for the app sections */
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #fff;
+  }
+  
+  .alert-info {
+    font-size: 14px;
+    text-align: center;
+    border-radius: 5px;
+  }
+  
+  @media (max-width: 767px) {
+    .table {
+      font-size: 14px; /* Make the table font size smaller on small screens */
+    }
+  }
+  

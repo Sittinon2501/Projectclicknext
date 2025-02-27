@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms'; 
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -30,7 +32,9 @@ import { NotificationsComponent } from './account/notifications/notifications.co
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModalModule
+
   ],
   providers: [
     provideClientHydration(withEventReplay()),

@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+/* styles.css (global styles for the app) */
+body {
+    background: linear-gradient(135deg, #ff7e5f, #feb47b); /* Orange gradient background */
+    background-size: cover; /* Make sure the background covers the entire page */
+    background-position: center;
+    height: 100vh; /* Ensure full screen height */
+    margin: 0;
+  }
+  

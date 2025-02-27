@@ -1,3 +1,16 @@
-<h3>Your Account Balance</h3>
-<p *ngIf="balance !== null">Your Balance: {{ balance | currency }}</p>
-<p *ngIf="message">{{ message }}</p>
+<!-- balance.component.html -->
+<div class="container mt-5">
+    <h3 class="text-center mb-4">Your Account Balance</h3>
+    
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <div *ngIf="balance !== null">
+          <p class="h5">Your Balance: <span class="text-success">{{ balance | currency }}</span></p>
+        </div>
+        
+        <!-- Message Display -->
+        <p *ngIf="message" class="alert alert-info mt-3">{{ message }}</p>
+      </div>
+    </div>
+  </div>
+  

@@ -1,36 +1,64 @@
-<h3>Transaction History</h3>
-<table *ngIf="transactions.length > 0">
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Amount</th>
-      <th>Date</th>
-      <th>Details</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let transaction of transactions" (click)="toggleDetails(transaction)">
-      <td>{{ transaction.type }}</td>
-      <td>{{ transaction.amount | currency }}</td>
-      <td>{{ transaction.createdAt | date:'medium' }}</td>
-      <td><button>{{ transaction.showDetails ? 'Hide Details' : 'Show Details' }}</button></td>
-    </tr>
-    <tr *ngFor="let transaction of transactions">
-      <td colspan="4" *ngIf="transaction.showDetails">
-        <div>
-          <strong>Description:</strong> {{ transaction.description || 'No description provided' }}
+<div class="container mt-5">
+    <h3 class="text-center mb-4">Transaction History</h3>
+  
+    <div *ngIf="transactions.length > 0" class="table-responsive">
+      <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Display transaction rows -->
+          <tr *ngFor="let transaction of transactions" style="cursor: pointer;">
+            <td>{{ transaction.type }}</td> <!-- No color change for Type -->
+            <td [ngClass]="{
+              'text-success': transaction.type === 'deposit' || transaction.type === 'transfer in',
+              'text-danger': transaction.type === 'withdraw' || transaction.type === 'transfer out'
+            }">
+              <!-- Display + for deposit/transfer in and - for withdraw/transfer out -->
+              <span *ngIf="transaction.type === 'deposit' || transaction.type === 'transfer in'">+ </span>
+              <span *ngIf="transaction.type === 'withdraw' || transaction.type === 'transfer out'">- </span>
+              {{ transaction.amount | currency }}
+            </td>
+            <td>{{ transaction.createdAt | date:'medium' }}</td>
+            <td>
+              <button
+                class="btn btn-info btn-sm"
+                [ngClass]="{'btn-active': selectedTransaction === transaction}"
+                (click)="openModal(transaction)">
+                {{ selectedTransaction === transaction && transaction.showDetails ? 'Hide Details' : 'Show Details' }}
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Display message if exists -->
+    <p *ngIf="message" class="alert alert-info mt-3">{{ message }}</p>
+  
+    <!-- Modal for Transaction Details -->
+    <div *ngIf="selectedTransaction" class="modal-backdrop" (click)="closeModal()">
+      <div class="modal-dialog" (click)="$event.stopPropagation()">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Transaction Details</h5>
+          </div>
+          <div class="modal-body">
+            <strong>Description:</strong> {{ selectedTransaction.description || 'No description provided' }}
+            <div *ngIf="selectedTransaction.type !== 'deposit' && selectedTransaction.type !== 'withdraw'">
+              <strong>Sender Account:</strong> {{ selectedTransaction.senderAccountNumber }} ({{ selectedTransaction.senderAccountName }})
+            </div>
+            <div *ngIf="selectedTransaction.recipientAccountNumber && selectedTransaction.recipientAccountName">
+              <strong>Recipient Account:</strong> {{ selectedTransaction.recipientAccountNumber }} ({{ selectedTransaction.recipientAccountName }})
+            </div>
+          </div>
         </div>
-        <!-- เงื่อนไขการแสดง Sender Account หรือ Recipient Account -->
-        <div *ngIf="transaction.type !== 'deposit' && transaction.type !== 'withdraw'">
-          <strong>Sender Account:</strong> {{ transaction.senderAccountNumber }} ({{ transaction.senderAccountName }})
-        </div>
-        <!-- แสดง Recipient Account เฉพาะเมื่อมีข้อมูล -->
-        <div *ngIf="transaction.recipientAccountNumber && transaction.recipientAccountName">
-          <strong>Recipient Account:</strong> {{ transaction.recipientAccountNumber }} ({{ transaction.recipientAccountName }})
-        </div>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<p *ngIf="message">{{ message }}</p>
+      </div>
+    </div>
+  </div>
+  

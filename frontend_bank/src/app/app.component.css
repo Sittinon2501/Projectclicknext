@@ -2,8 +2,8 @@
 
 /* Style for profile image */
 .navbar .profile-img {
-  width: 30px; /* ขนาดของรูปโปรไฟล์ */
-  height: 30px;
+  width: 35px; /* ขนาดของรูปโปรไฟล์ */
+  height: 35px;
   border-radius: 50%;
   margin-right: 8px;
 }
@@ -33,13 +33,15 @@
 /* Style for notification dropdown */
 .notification-dropdown {
   position: absolute;
-  top: 30px;
+  top: 40px; /* ปรับให้อยู่ใต้ไอคอน */
   right: 0;
   background-color: white;
   border: 1px solid #ccc;
   padding: 10px;
-  width: 200px;
+  width: 220px; /* ขยายขนาด dropdown */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px; /* ทำให้มุมของ dropdown โค้งมน */
+  display: none; /* ซ่อน dropdown เมื่อไม่ใช้งาน */
 }
 
 .notification-dropdown ul {
@@ -48,13 +50,26 @@
 }
 
 .notification-dropdown li {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .notification-dropdown button {
   margin-top: 5px;
-  padding: 5px;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
+}
+
+.notification-dropdown button:hover {
+  background-color: #0056b3;
+}
+
+/* Show dropdown when the notification icon is clicked */
+.navbar .notification-icon:hover .notification-dropdown {
+  display: block; /* แสดง dropdown เมื่อ hover หรือคลิกที่ไอคอน */
 }
 
 /* Responsive design for small screens (max-width: 767px) */
@@ -63,17 +78,21 @@
     text-align: center; /* จัดให้ nav items อยู่ตรงกลางบนมือถือ */
   }
 
-  /* ขนาดของไอคอนใน navbar สำหรับมือถือ */
   .navbar .notification-icon i {
-    font-size: 20px;
+    font-size: 20px; /* ขนาดของไอคอนใน navbar สำหรับมือถือ */
   }
 
   .navbar .profile-img {
-    width: 25px; /* ขนาดรูปโปรไฟล์เล็กลงบนมือถือ */
-    height: 25px;
+    width: 30px; /* ขนาดรูปโปรไฟล์เล็กลงบนมือถือ */
+    height: 30px;
   }
 
   .navbar .navbar-toggler-icon {
     background-color: #000; /* เปลี่ยนสีของ burger icon ให้ชัดขึ้น */
+  }
+
+  .notification-dropdown {
+    width: 90%; /* ทำให้ dropdown กว้างขึ้นบนมือถือ */
+    padding: 15px;
   }
 }

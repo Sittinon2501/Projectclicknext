@@ -5,11 +5,12 @@ import { BankService } from '../../service/bank.service';
   selector: 'app-history',
   standalone: false,
   templateUrl: './history.component.html',
-  styleUrl: './history.component.css'
+  styleUrls: ['./history.component.css']
 })
 export class HistoryComponent {
   transactions: any[] = [];
   message: string = '';
+  selectedTransaction: any = null; // To store the selected transaction for the modal
 
   constructor(private bankService: BankService) {}
 
@@ -32,7 +33,15 @@ export class HistoryComponent {
     });
   }
 
-  toggleDetails(transaction: any) {
-    transaction.showDetails = !transaction.showDetails;
+  openModal(transaction: any) {
+    this.selectedTransaction = transaction;
+    transaction.showDetails = !transaction.showDetails; // Toggle details visibility
+  }
+
+  closeModal() {
+    if (this.selectedTransaction) {
+      this.selectedTransaction.showDetails = false; // Hide details when modal is closed
+      this.selectedTransaction = null; // Clear selected transaction
+    }
   }
 }
