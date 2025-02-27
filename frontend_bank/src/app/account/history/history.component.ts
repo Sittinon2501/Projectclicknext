@@ -21,10 +21,18 @@ export class HistoryComponent {
     this.bankService.getTransactionHistory().subscribe({
       next: (res) => {
         this.transactions = res.transactions;
+        // Initialize showDetails flag for each transaction
+        this.transactions.forEach(transaction => {
+          transaction.showDetails = false; // initially hide details
+        });
       },
       error: (err) => {
         this.message = err.error.message || 'Error fetching transaction history';
       },
     });
+  }
+
+  toggleDetails(transaction: any) {
+    transaction.showDetails = !transaction.showDetails;
   }
 }

@@ -1,14 +1,35 @@
 <h3>Transaction History</h3>
 <table *ngIf="transactions.length > 0">
-  <tr>
-    <th>Type</th>
-    <th>Amount</th>
-    <th>Date</th>
-  </tr>
-  <tr *ngFor="let transaction of transactions">
-    <td>{{ transaction.type }}</td>
-    <td>{{ transaction.amount | currency }}</td>
-    <td>{{ transaction.createdAt | date:'medium' }}</td>
-  </tr>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Amount</th>
+      <th>Date</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let transaction of transactions" (click)="toggleDetails(transaction)">
+      <td>{{ transaction.type }}</td>
+      <td>{{ transaction.amount | currency }}</td>
+      <td>{{ transaction.createdAt | date:'medium' }}</td>
+      <td><button>{{ transaction.showDetails ? 'Hide Details' : 'Show Details' }}</button></td>
+    </tr>
+    <tr *ngFor="let transaction of transactions">
+      <td colspan="4" *ngIf="transaction.showDetails">
+        <div>
+          <strong>Description:</strong> {{ transaction.description }}
+        </div>
+        <div>
+          <strong>Sender Account:</strong> {{ transaction.senderAccountNumber }} ({{ transaction.senderAccountName }})
+        </div>
+        <!-- แสดง Recipient Account เฉพาะเมื่อมีข้อมูล -->
+        <div *ngIf="transaction.recipientAccountNumber && transaction.recipientAccountName">
+          <strong>Recipient Account:</strong> {{ transaction.recipientAccountNumber }} ({{ transaction.recipientAccountName }})
+        </div>
+      </td>
+    </tr>
+  </tbody>
 </table>
+
 <p *ngIf="message">{{ message }}</p>

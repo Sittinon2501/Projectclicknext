@@ -148,24 +148,52 @@ exports.viewBalance = async (req, res) => {
 
 exports.transactionHistory = async (req, res) => {
   try {
-    // ดึง userId จาก Token
     const userId = req.user.userId;
 
     // ค้นหาบัญชีของผู้ใช้
     const account = await Account.findOne({ where: { userId } });
     if (!account) {
-      return res
-        .status(404)
-        .json({ message: "No account found for this user" });
+      return res.status(404).json({ message: "No account found for this user" });
     }
 
-    // ค้นหาประวัติธุรกรรมของบัญชีนี้โดยใช้ accountNumber แทน accountId
+    // ค้นหาประวัติธุรกรรมของบัญชีนี้
     const transactions = await Transaction.findAll({
-      where: { accountNumber: account.accountNumber }, // เปลี่ยนจาก accountId เป็น accountNumber
+      where: { accountNumber: account.accountNumber },
       order: [["createdAt", "DESC"]],
     });
 
-    res.json({ transactions });
+    // สร้างข้อมูลธุรกรรมที่ต้องการส่งกลับ
+    const transactionDetails = await Promise.all(
+      transactions.map(async (transaction) => {
+        // ดึงข้อมูลบัญชีผู้โอน
+        const senderAccount = await Account.findOne({
+          where: { accountNumber: transaction.accountNumber },
+        });
+
+        // ดึงข้อมูลบัญชีผู้รับ (ถ้ามี recipientAccountId)
+        const recipientAccount = transaction.recipientAccountId
+          ? await Account.findOne({
+              where: { accountNumber: transaction.recipientAccountId },
+            })
+          : null;
+
+        return {
+          ...transaction.dataValues,
+          senderAccountNumber: senderAccount ? senderAccount.accountNumber : 'N/A',
+          senderAccountName: senderAccount ? senderAccount.accountName : 'N/A',
+          // ตรวจสอบว่ามีข้อมูลผู้รับหรือไม่ ถ้าไม่มีจะไม่ส่งข้อมูล
+          recipientAccountNumber: recipientAccount
+            ? recipientAccount.accountNumber
+            : null,  // ไม่แสดง recipientAccount ถ้าไม่มีข้อมูล
+          recipientAccountName: recipientAccount
+            ? recipientAccount.accountName
+            : null,  // ไม่แสดง recipientAccount ถ้าไม่มีข้อมูล
+          description: transaction.description || 'No description',
+        };
+      })
+    );
+
+    res.json({ transactions: transactionDetails });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
