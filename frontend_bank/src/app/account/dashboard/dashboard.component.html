@@ -1,0 +1,26 @@
+<h2>Your Dashboard</h2>
+
+<div *ngIf="accounts.length > 0">
+  <h3>Your Bank Accounts</h3>
+  <table>
+    <tr>
+      <th>Account Number</th>
+      <th>Account Name</th>
+      <th>Type</th>
+      <th>Balance</th>
+      <th>Annual Interest</th>
+    </tr>
+    <tr *ngFor="let account of accounts">
+      <td>{{ account.accountNumber }}</td>
+      <td>{{ account.accountName }}</td>
+      <td>{{ account.accountType }}</td>
+      <td>{{ account.balance | currency }}</td>
+      <td>{{ calculateAnnualInterest(account) | currency }}</td>
+    </tr>
+  </table>
+</div>
+
+<app-balance></app-balance>
+<app-history></app-history>
+
+<p *ngIf="message">{{ message }}</p>

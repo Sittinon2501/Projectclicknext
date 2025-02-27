@@ -9,18 +9,21 @@ import { BankService } from '../../service/bank.service';
 })
 export class HistoryComponent {
   transactions: any[] = [];
-  message = '';
+  message: string = '';
 
   constructor(private bankService: BankService) {}
+
+  ngOnInit(): void {
+    this.getTransactionHistory();
+  }
 
   getTransactionHistory() {
     this.bankService.getTransactionHistory().subscribe({
       next: (res) => {
         this.transactions = res.transactions;
-        this.message = '';
       },
       error: (err) => {
-        this.message = err.error.message || 'Error fetching transactions';
+        this.message = err.error.message || 'Error fetching transaction history';
       },
     });
   }

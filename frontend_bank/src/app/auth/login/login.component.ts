@@ -9,21 +9,26 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  username = '';
-  password = '';
-  errorMessage = '';
+  username: string = '';
+  password: string = '';
+  message: string = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
   login() {
-    this.authService.login(this.username, this.password).subscribe({
-      next: (response) => {
-        console.log('Login successful', response);
-        this.router.navigate(['/home']); 
+    const credentials = {
+      username: this.username,
+      password: this.password
+    };
+
+    this.authService.login(credentials.username, credentials.password).subscribe({
+      next: (res) => {
+        // เมื่อล็อกอินสำเร็จ
+        this.router.navigate(['/home']);  // พาผู้ใช้ไปที่ Dashboard หรือหน้าอื่น ๆ
       },
       error: (err) => {
-        this.errorMessage = err.error.message || 'Login failed';
-      },
+        this.message = 'Invalid credentials or server error';
+      }
     });
   }
 }

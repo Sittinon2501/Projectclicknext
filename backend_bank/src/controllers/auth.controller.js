@@ -1,10 +1,11 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user.model');
+const { openAccount } = require('../controllers/account.controller'); // เพิ่มการเรียกใช้ฟังก์ชัน openAccount
 
 exports.register = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { username, password, accountName, accountType, initialDeposit } = req.body; // ลบ fixedTermMonths ออก
 
     // เช็คว่ามี username นี้อยู่แล้วหรือไม่
     const existingUser = await User.findOne({ where: { username } });
@@ -16,11 +17,22 @@ exports.register = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await User.create({ username, password: hashedPassword });
 
-    res.status(201).json({ message: 'User registered successfully', userId: user.id });
+    // เปิดบัญชีให้ผู้ใช้หลังจากสมัครสมาชิกเสร็จ
+    const accountData = { accountName, accountType, initialDeposit, userId: user.id };
+    const accountResponse = await openAccount(req, res, accountData); // เปิดบัญชีในฟังก์ชันนี้
+
+    res.status(201).json({
+      message: 'User registered and account opened successfully',
+      userId: user.id,
+      account: accountResponse.account,  // ข้อมูลบัญชี
+      annualInterest: accountResponse.annualInterest // ข้อมูลดอกเบี้ย
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
+
+
 
 exports.login = async (req, res) => {
   try {

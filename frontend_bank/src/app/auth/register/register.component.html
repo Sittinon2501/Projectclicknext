@@ -1,22 +1,58 @@
-<div class="register-container">
-  <h2>Register</h2>
-  <form (submit)="register()">
+<h2>Register</h2>
+<form (submit)="register()">
+  <div>
+    <label for="username">Username:</label>
     <input
       type="text"
       [(ngModel)]="username"
-      name="username"
       placeholder="Username"
+      name="username"
       required
     />
+  </div>
+
+  <div>
+    <label for="password">Password:</label>
     <input
       type="password"
       [(ngModel)]="password"
-      name="password"
       placeholder="Password"
+      name="password"
       required
     />
-    <button type="submit">Register</button>
-  </form>
+  </div>
 
-  <p *ngIf="errorMessage">{{ errorMessage }}</p>
-</div>
+  <div>
+    <label for="accountName">Account Name:</label>
+    <input
+      type="text"
+      [(ngModel)]="accountName"
+      placeholder="Account Name"
+      name="accountName"
+      required
+    />
+  </div>
+
+  <div>
+    <label for="accountType">Account Type:</label>
+    <select [(ngModel)]="accountType" name="accountType" required>
+      <option value="savings">Savings</option>
+      <!-- You can add more account types here in the future -->
+    </select>
+  </div>
+
+  <div>
+    <label for="initialDeposit">Initial Deposit:</label>
+    <input
+      type="number"
+      [(ngModel)]="initialDeposit"
+      placeholder="Initial Deposit"
+      name="initialDeposit"
+      required
+    />
+  </div>
+
+  <button type="submit">Register</button>
+</form>
+
+<p>{{ message }}</p>

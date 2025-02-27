@@ -1,19 +1,23 @@
 <h2>Transactions</h2>
+
+<!-- Form สำหรับฝากเงิน -->
 <form (submit)="deposit()">
-  <input type="text" [(ngModel)]="accountId" placeholder="Your Account ID" required />
-  <input type="number" [(ngModel)]="amount" placeholder="Amount" required />
+  <input type="text" [(ngModel)]="accountId" name="accountIdDeposit" placeholder="Your Account ID" required />
+  <input type="number" [(ngModel)]="amount" name="amountDeposit" placeholder="Amount" required />
   <button type="submit">Deposit</button>
 </form>
 
+<!-- Form สำหรับถอนเงิน -->
 <form (submit)="withdraw()">
-  <input type="text" [(ngModel)]="accountId" placeholder="Your Account ID" required />
-  <input type="number" [(ngModel)]="amount" placeholder="Amount" required />
+  <input type="text" [(ngModel)]="accountId" name="accountIdWithdraw" placeholder="Your Account ID" required />
+  <input type="number" [(ngModel)]="amount" name="amountWithdraw" placeholder="Amount" required />
   <button type="submit">Withdraw</button>
 </form>
 
+<!-- Form สำหรับโอนเงิน -->
 <form (submit)="transfer()">
-  <input type="text" [(ngModel)]="recipientAccountNumber" placeholder="Recipient Account Number" required />
-  <input type="number" [(ngModel)]="amount" placeholder="Amount" required />
+  <input type="text" [(ngModel)]="recipientAccountNumber" name="recipientAccountNumber" placeholder="Recipient Account Number" required />
+  <input type="number" [(ngModel)]="amount" name="amountTransfer" placeholder="Amount" required />
   <button type="submit">Transfer</button>
 </form>
 

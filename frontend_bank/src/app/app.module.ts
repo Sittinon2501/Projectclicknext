@@ -12,6 +12,7 @@ import { OpenAccountComponent } from './account/open-account/open-account.compon
 import { TransactionsComponent } from './account/transactions/transactions.component';
 import { BalanceComponent } from './account/balance/balance.component';
 import { HistoryComponent } from './account/history/history.component';
+import { DashboardComponent } from './account/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HistoryComponent } from './account/history/history.component';
     OpenAccountComponent,
     TransactionsComponent,
     BalanceComponent,
-    HistoryComponent
+    HistoryComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

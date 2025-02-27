@@ -1,7 +1,4 @@
-<h2>Transaction History</h2>
-<button (click)="getTransactionHistory()">View Transactions</button>
-<p *ngIf="message">{{ message }}</p>
-
+<h3>Transaction History</h3>
 <table *ngIf="transactions.length > 0">
   <tr>
     <th>Type</th>
@@ -14,3 +11,4 @@
     <td>{{ transaction.createdAt | date:'medium' }}</td>
   </tr>
 </table>
+<p *ngIf="message">{{ message }}</p>

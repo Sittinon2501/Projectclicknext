@@ -7,8 +7,11 @@ import { OpenAccountComponent } from './account/open-account/open-account.compon
 import { TransactionsComponent } from './account/transactions/transactions.component';
 import { BalanceComponent } from './account/balance/balance.component';
 import { HistoryComponent } from './account/history/history.component';
+import { DashboardComponent } from './account/dashboard/dashboard.component';
 
 const routes: Routes = [
+  { path: 'dashboard', component: DashboardComponent },
+
   { path: 'open-account', component: OpenAccountComponent },
   { path: 'transactions', component: TransactionsComponent },
   { path: 'balance', component: BalanceComponent },
