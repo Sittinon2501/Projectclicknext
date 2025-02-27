@@ -1,5 +1,6 @@
 const Account = require("../models/account.model");
 const Transaction = require("../models/transaction.model");
+const Notification = require("../models/notification.model"); // นำเข้า Notification model
 
 exports.deposit = async (req, res) => {
   try {
@@ -111,6 +112,15 @@ exports.transfer = async (req, res) => {
       description: description || "Transfer from another account", // ใช้คำอธิบายที่ส่งมา
     });
 
+    // สร้างการแจ้งเตือนให้กับผู้รับ
+    const notificationMessage = `You have received a transfer of ${amount} from account ${
+      senderAccount.accountNumber
+    }. Description: ${description || "No description"}`;
+    await Notification.create({
+      userId: recipientAccount.userId, // userId ของผู้รับการแจ้งเตือน
+      message: notificationMessage, // ข้อความการแจ้งเตือน
+    });
+
     res.json({
       message: "Transfer successful",
       sender: {
@@ -153,7 +163,9 @@ exports.transactionHistory = async (req, res) => {
     // ค้นหาบัญชีของผู้ใช้
     const account = await Account.findOne({ where: { userId } });
     if (!account) {
-      return res.status(404).json({ message: "No account found for this user" });
+      return res
+        .status(404)
+        .json({ message: "No account found for this user" });
     }
 
     // ค้นหาประวัติธุรกรรมของบัญชีนี้
@@ -179,16 +191,18 @@ exports.transactionHistory = async (req, res) => {
 
         return {
           ...transaction.dataValues,
-          senderAccountNumber: senderAccount ? senderAccount.accountNumber : 'N/A',
-          senderAccountName: senderAccount ? senderAccount.accountName : 'N/A',
+          senderAccountNumber: senderAccount
+            ? senderAccount.accountNumber
+            : "N/A",
+          senderAccountName: senderAccount ? senderAccount.accountName : "N/A",
           // ตรวจสอบว่ามีข้อมูลผู้รับหรือไม่ ถ้าไม่มีจะไม่ส่งข้อมูล
           recipientAccountNumber: recipientAccount
             ? recipientAccount.accountNumber
-            : null,  // ไม่แสดง recipientAccount ถ้าไม่มีข้อมูล
+            : null, // ไม่แสดง recipientAccount ถ้าไม่มีข้อมูล
           recipientAccountName: recipientAccount
             ? recipientAccount.accountName
-            : null,  // ไม่แสดง recipientAccount ถ้าไม่มีข้อมูล
-          description: transaction.description || 'No description',
+            : null, // ไม่แสดง recipientAccount ถ้าไม่มีข้อมูล
+          description: transaction.description || "No description",
         };
       })
     );

@@ -1,0 +1,18 @@
+<h3>Notifications</h3>
+<div *ngIf="notifications.length > 0">
+  <ul>
+    <li *ngFor="let notification of notifications">
+      <p>{{ notification.message }}</p>
+      <button (click)="markAsRead(notification.id)" *ngIf="!notification.isRead">
+        Mark as Read
+      </button>
+      <button (click)="deleteNotification(notification.id)">
+        Delete
+      </button>
+    </li>
+  </ul>
+</div>
+
+<p *ngIf="notifications.length === 0">No notifications</p>
+
+<p *ngIf="message">{{ message }}</p>

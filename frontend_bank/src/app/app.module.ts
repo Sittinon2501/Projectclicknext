@@ -12,6 +12,7 @@ import { TransactionsComponent } from './account/transactions/transactions.compo
 import { BalanceComponent } from './account/balance/balance.component';
 import { HistoryComponent } from './account/history/history.component';
 import { DashboardComponent } from './account/dashboard/dashboard.component';
+import { NotificationsComponent } from './account/notifications/notifications.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { DashboardComponent } from './account/dashboard/dashboard.component';
     TransactionsComponent,
     BalanceComponent,
     HistoryComponent,
-    DashboardComponent
+    DashboardComponent,
+    NotificationsComponent
   ],
   imports: [
     BrowserModule,
