@@ -18,6 +18,11 @@ const Transaction = sequelize.define('Transaction', {
     type: DataTypes.STRING, 
     allowNull: true // ใช้กรณีโอนเงินเท่านั้น
   },
+  description: {  // เพิ่มคอลัมน์ description
+    type: DataTypes.TEXT,
+    allowNull: false,
+    defaultValue: 'No description provided' // ค่าเริ่มต้นเมื่อไม่มีคำอธิบาย
+  },
   createdAt: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
 }, { timestamps: false });
 

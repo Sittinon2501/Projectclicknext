@@ -20,32 +20,32 @@ export class BankService {
     };
   }
 
-  // ✅ เปิดบัญชีใหม่
+  //  เปิดบัญชีใหม่
   openAccount(accountData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/account/open`, accountData, this.getHeaders());
   }
 
-  // ✅ ฝากเงิน
+  //  ฝากเงิน
   deposit(data: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/transaction/deposit`, data, this.getHeaders());
   }
 
-  // ✅ ถอนเงิน
+  //  ถอนเงิน
   withdraw(data: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/transaction/withdraw`, data, this.getHeaders());
   }
 
-  // ✅ โอนเงิน
+  //  โอนเงิน
   transfer(data: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/transaction/transfer`, data, this.getHeaders());
   }
 
-  // ✅ ดูยอดเงิน
+  //  ดูยอดเงิน
   getBalance(): Observable<any> {
     return this.http.get(`${this.apiUrl}/transaction/balance`, this.getHeaders());
   }
 
-  // ✅ ดูประวัติธุรกรรม
+  //  ดูประวัติธุรกรรม
   getTransactionHistory(): Observable<any> {
     return this.http.get(`${this.apiUrl}/transaction/history`, this.getHeaders());
   }

@@ -37,6 +37,7 @@
   <form (submit)="transfer()">
     <input type="text" [(ngModel)]="recipientAccountNumber" name="recipientAccountNumber" placeholder="Recipient Account Number" required />
     <input type="number" [(ngModel)]="amount" name="amountTransfer" placeholder="Amount" required />
+    <textarea [(ngModel)]="description" name="description" placeholder="Description (optional)"></textarea> <!-- คำอธิบาย -->
     <button type="submit">Transfer</button>
   </form>
 </div>

@@ -11,6 +11,7 @@ export class TransactionsComponent {
   accountNumber = ''; // เปลี่ยนจาก accountId เป็น accountNumber
   amount = 0;
   recipientAccountNumber = '';
+  description = ''; // เพิ่มตัวแปร description
   message = '';
   transactionType: 'deposit' | 'withdraw' | 'transfer' = 'deposit'; // ใช้เพื่อเลือกประเภทของการทำรายการ
 
@@ -31,12 +32,16 @@ export class TransactionsComponent {
   }
 
   transfer() {
-    this.bankService.transfer({ recipientAccountNumber: this.recipientAccountNumber, amount: this.amount }).subscribe({
+    this.bankService.transfer({
+      recipientAccountNumber: this.recipientAccountNumber,
+      amount: this.amount,
+      description: this.description // ส่งคำอธิบายไปด้วย
+    }).subscribe({
       next: (res) => (this.message = res.message),
       error: (err) => (this.message = err.error.message),
     });
   }
-  
+
   // เลือกประเภทการทำรายการ
   selectTransactionType(type: 'deposit' | 'withdraw' | 'transfer') {
     this.transactionType = type;

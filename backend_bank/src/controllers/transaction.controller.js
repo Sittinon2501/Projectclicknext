@@ -52,9 +52,8 @@ exports.withdraw = async (req, res) => {
 };
 exports.transfer = async (req, res) => {
   try {
-    const { recipientAccountNumber, amount } = req.body;
+    const { recipientAccountNumber, amount, description } = req.body; // รับค่า description
 
-    // ตรวจสอบว่า จำนวนเงินต้องมากกว่าศูนย์
     if (amount <= 0) {
       return res
         .status(400)
@@ -78,14 +77,12 @@ exports.transfer = async (req, res) => {
       return res.status(404).json({ message: "Recipient account not found" });
     }
 
-    // ตรวจสอบว่าไม่สามารถโอนให้บัญชีตัวเองได้
     if (senderAccount.id === recipientAccount.id) {
       return res
         .status(400)
         .json({ message: "Cannot transfer to your own account" });
     }
 
-    // ตรวจสอบว่าในบัญชีผู้โอนมีเงินพอหรือไม่
     if (senderAccount.balance < amount) {
       return res.status(400).json({ message: "Insufficient funds" });
     }
@@ -97,19 +94,21 @@ exports.transfer = async (req, res) => {
     await senderAccount.save();
     await recipientAccount.save();
 
-    // บันทึกธุรกรรมของผู้โอน (transfer out)
+    // บันทึกธุรกรรมของผู้โอน (transfer out) พร้อมคำอธิบาย
     await Transaction.create({
-      accountNumber: senderAccount.accountNumber, // ใช้ accountNumber
+      accountNumber: senderAccount.accountNumber,
       type: "transfer out", // กำหนดเป็น 'transfer out'
       amount,
-      recipientAccountId: recipientAccount.accountNumber, // ส่ง accountNumber ของผู้รับ
+      recipientAccountId: recipientAccount.accountNumber,
+      description: description || "Transfer to another account", // ใช้คำอธิบายที่ส่งมา
     });
 
-    // บันทึกธุรกรรมของผู้รับ (transfer in)
+    // บันทึกธุรกรรมของผู้รับ (transfer in) พร้อมคำอธิบาย
     await Transaction.create({
-      accountNumber: recipientAccount.accountNumber, // ใช้ accountNumber
+      accountNumber: recipientAccount.accountNumber,
       type: "transfer in", // กำหนดเป็น 'transfer in'
-      amount, // บันทึกยอดที่เพิ่มเข้ามา
+      amount,
+      description: description || "Transfer from another account", // ใช้คำอธิบายที่ส่งมา
     });
 
     res.json({
@@ -124,11 +123,10 @@ exports.transfer = async (req, res) => {
       },
     });
   } catch (error) {
-    console.error(error); // เพิ่มการตรวจสอบข้อผิดพลาดในฝั่งเซิร์ฟเวอร์
+    console.error(error);
     res.status(500).json({ error: error.message });
   }
 };
-
 exports.viewBalance = async (req, res) => {
   try {
     // ดึง userId จาก Token
