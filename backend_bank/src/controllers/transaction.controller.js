@@ -54,13 +54,14 @@ exports.transfer = async (req, res) => {
   try {
     const { recipientAccountNumber, amount } = req.body;
 
+    // ตรวจสอบว่า จำนวนเงินต้องมากกว่าศูนย์
     if (amount <= 0) {
       return res
         .status(400)
         .json({ message: "Transfer amount must be greater than 0" });
     }
 
-    // ค้นหาบัญชีของผู้ส่งจาก userId ใน Token
+    // ค้นหาบัญชีของผู้โอนจาก userId ใน Token
     const senderAccount = await Account.findOne({
       where: { userId: req.user.userId },
     });
@@ -77,35 +78,37 @@ exports.transfer = async (req, res) => {
       return res.status(404).json({ message: "Recipient account not found" });
     }
 
+    // ตรวจสอบว่าไม่สามารถโอนให้บัญชีตัวเองได้
     if (senderAccount.id === recipientAccount.id) {
       return res
         .status(400)
         .json({ message: "Cannot transfer to your own account" });
     }
 
+    // ตรวจสอบว่าในบัญชีผู้โอนมีเงินพอหรือไม่
     if (senderAccount.balance < amount) {
       return res.status(400).json({ message: "Insufficient funds" });
     }
 
-    // หักเงินจากบัญชีผู้ส่ง และเพิ่มเงินให้บัญชีผู้รับ
+    // หักเงินจากบัญชีผู้โอน และเพิ่มเงินให้บัญชีผู้รับ
     senderAccount.balance -= amount;
     recipientAccount.balance += amount;
 
     await senderAccount.save();
     await recipientAccount.save();
 
-    // บันทึกธุรกรรมของผู้ส่ง (transfer out)
+    // บันทึกธุรกรรมของผู้โอน (transfer out)
     await Transaction.create({
-      accountNumber: senderAccount.accountNumber, // เปลี่ยนจาก accountId เป็น accountNumber
-      type: "transfer out", // เปลี่ยนเป็น 'transfer out'
+      accountNumber: senderAccount.accountNumber, // ใช้ accountNumber
+      type: "transfer out", // กำหนดเป็น 'transfer out'
       amount,
-      recipientAccountId: recipientAccount.accountNumber, // เปลี่ยนจาก accountId เป็น accountNumber
+      recipientAccountId: recipientAccount.accountNumber, // ส่ง accountNumber ของผู้รับ
     });
 
     // บันทึกธุรกรรมของผู้รับ (transfer in)
     await Transaction.create({
-      accountNumber: recipientAccount.accountNumber, // เปลี่ยนจาก accountId เป็น accountNumber
-      type: "transfer in", // เปลี่ยนเป็น 'transfer in'
+      accountNumber: recipientAccount.accountNumber, // ใช้ accountNumber
+      type: "transfer in", // กำหนดเป็น 'transfer in'
       amount, // บันทึกยอดที่เพิ่มเข้ามา
     });
 
