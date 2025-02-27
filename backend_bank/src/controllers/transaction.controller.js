@@ -94,18 +94,19 @@ exports.transfer = async (req, res) => {
     await senderAccount.save();
     await recipientAccount.save();
 
-    // บันทึกธุรกรรม
+    // บันทึกธุรกรรมของผู้ส่ง (transfer out)
     await Transaction.create({
-      accountId: senderAccount.id,
-      type: "transfer",
+      accountNumber: senderAccount.accountNumber, // เปลี่ยนจาก accountId เป็น accountNumber
+      type: "transfer out", // เปลี่ยนเป็น 'transfer out'
       amount,
-      recipientAccountId: recipientAccount.id,
+      recipientAccountId: recipientAccount.accountNumber, // เปลี่ยนจาก accountId เป็น accountNumber
     });
 
+    // บันทึกธุรกรรมของผู้รับ (transfer in)
     await Transaction.create({
-      accountId: recipientAccount.id,
-      type: "deposit",
-      amount,
+      accountNumber: recipientAccount.accountNumber, // เปลี่ยนจาก accountId เป็น accountNumber
+      type: "transfer in", // เปลี่ยนเป็น 'transfer in'
+      amount, // บันทึกยอดที่เพิ่มเข้ามา
     });
 
     res.json({
@@ -120,50 +121,51 @@ exports.transfer = async (req, res) => {
       },
     });
   } catch (error) {
+    console.error(error); // เพิ่มการตรวจสอบข้อผิดพลาดในฝั่งเซิร์ฟเวอร์
     res.status(500).json({ error: error.message });
   }
 };
 
 exports.viewBalance = async (req, res) => {
-    try {
-      // ดึง userId จาก Token
-      const userId = req.user.userId;
-  
-      // ค้นหาบัญชีของผู้ใช้
-      const account = await Account.findOne({ where: { userId } });
-      if (!account) {
-        return res.status(404).json({ message: 'No account found for this user' });
-      }
-  
-      res.json({ balance: account.balance });
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  };
-  
+  try {
+    // ดึง userId จาก Token
+    const userId = req.user.userId;
 
-  exports.transactionHistory = async (req, res) => {
-    try {
-      // ดึง userId จาก Token
-      const userId = req.user.userId;
-  
-      // ค้นหาบัญชีของผู้ใช้
-      const account = await Account.findOne({ where: { userId } });
-      if (!account) {
-        return res
-          .status(404)
-          .json({ message: "No account found for this user" });
-      }
-  
-      // ค้นหาประวัติธุรกรรมของบัญชีนี้โดยใช้ accountNumber แทน accountId
-      const transactions = await Transaction.findAll({
-        where: { accountNumber: account.accountNumber }, // เปลี่ยนจาก accountId เป็น accountNumber
-        order: [["createdAt", "DESC"]],
-      });
-  
-      res.json({ transactions });
-    } catch (error) {
-      res.status(500).json({ error: error.message });
+    // ค้นหาบัญชีของผู้ใช้
+    const account = await Account.findOne({ where: { userId } });
+    if (!account) {
+      return res
+        .status(404)
+        .json({ message: "No account found for this user" });
     }
-  };
-  
+
+    res.json({ balance: account.balance });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+exports.transactionHistory = async (req, res) => {
+  try {
+    // ดึง userId จาก Token
+    const userId = req.user.userId;
+
+    // ค้นหาบัญชีของผู้ใช้
+    const account = await Account.findOne({ where: { userId } });
+    if (!account) {
+      return res
+        .status(404)
+        .json({ message: "No account found for this user" });
+    }
+
+    // ค้นหาประวัติธุรกรรมของบัญชีนี้โดยใช้ accountNumber แทน accountId
+    const transactions = await Transaction.findAll({
+      where: { accountNumber: account.accountNumber }, // เปลี่ยนจาก accountId เป็น accountNumber
+      order: [["createdAt", "DESC"]],
+    });
+
+    res.json({ transactions });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
