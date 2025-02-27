@@ -1,0 +1,4 @@
+<h2>Account Balance</h2>
+<button (click)="getBalance()">Check Balance</button>
+<p *ngIf="balance !== null">Your Balance: {{ balance | currency }}</p>
+<p *ngIf="message">{{ message }}</p>

@@ -1,0 +1,19 @@
+<h2>Open New Bank Account</h2>
+<form (submit)="openAccount()">
+  <input type="text" [(ngModel)]="accountName" name="accountName" placeholder="Account Name" required />
+  <select [(ngModel)]="accountType" name="accountType">
+    <option value="savings">Savings</option>
+    <option value="fixed_deposit">Fixed Deposit</option>
+  </select>
+  <input type="number" [(ngModel)]="initialDeposit" name="initialDeposit" placeholder="Initial Deposit" required />
+
+  <!-- ✅ ถ้าเลือก Fixed Deposit ให้เลือกระยะเวลาที่กำหนด -->
+  <select *ngIf="accountType === 'fixed_deposit'" [(ngModel)]="fixedTermMonths" name="fixedTermMonths">
+    <option value="3">3 Months</option>
+    <option value="6">6 Months</option>
+    <option value="12">12 Months</option>
+  </select>
+
+  <button type="submit">Open Account</button>
+</form>
+<p>{{ message }}</p>

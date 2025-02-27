@@ -1,3 +1,4 @@
+version: "3.8"
 
 services:
   db:
@@ -23,9 +24,9 @@ services:
     env_file:
       - ./backend_bank/.env
     volumes:
-      - ./backend_bank:/app
-      - /app/node_modules
-    command: npm run dev
+      - ./backend_bank:/app        # เชื่อมโฟลเดอร์ backend จากเครื่องโฮสต์ไปยัง container
+      - /app/node_modules          # เชื่อม node_modules ที่ติดตั้งภายใน container
+    command: npm run dev            # ใช้คำสั่ง dev เพื่อรองรับ hot-reloading
 
   frontend:
     build: ./frontend_bank
@@ -34,13 +35,13 @@ services:
     depends_on:
       - backend
     ports:
-      - "3000:3000"
+      - "4200:4200"
     environment:
-      - NUXT_PUBLIC_API_URL=http://backend:5000/api
+      - API_URL=http://backend:5000/api
     volumes:
-      - ./frontend_bank:/app
-      - /app/node_modules
-    command: npm run dev
+      - ./frontend_bank:/app       # เชื่อมโฟลเดอร์ frontend จากเครื่องโฮสต์ไปยัง container
+      - /app/node_modules          # เชื่อม node_modules ที่ติดตั้งภายใน container
+    command: npm start             # ใช้คำสั่ง start เพื่อรองรับ hot-reloading
 
 volumes:
   mysql_data:

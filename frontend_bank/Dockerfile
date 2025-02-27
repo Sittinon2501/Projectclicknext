@@ -1,18 +1,20 @@
-# ใช้ Node.js เวอร์ชันล่าสุด
+# ใช้ Node.js เวอร์ชันล่าสุดเป็น base image
 FROM node:18
 
-# ตั้งค่าโฟลเดอร์ทำงานใน Container
+# กำหนด working directory ภายใน container
 WORKDIR /app
 
-# คัดลอก package.json และติดตั้ง dependencies
-COPY package.json package-lock.json ./
+# คัดลอก package.json และ package-lock.json ไปยัง container
+COPY package*.json ./
+
+# ติดตั้ง dependencies
 RUN npm install
 
-# คัดลอกไฟล์ทั้งหมดเข้า Container
+# คัดลอกโค้ดทั้งหมดไปยัง container
 COPY . .
 
-# สร้าง Nuxt Build
-RUN npm run build
+# ใช้พอร์ต 4200 สำหรับ Angular
+EXPOSE 4200
 
-# ใช้ Nuxt.js โหมด production
-CMD ["npm", "run", "start"]
+# คำสั่งเริ่มต้นเมื่อ container ทำงาน
+CMD ["npm", "start"]

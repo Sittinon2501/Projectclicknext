@@ -1,0 +1,21 @@
+<nav>
+  <ul>
+    <li *ngIf="!isLoggedIn"><a routerLink="/login">Login</a></li>
+    <li *ngIf="!isLoggedIn"><a routerLink="/register">Register</a></li>
+    <li *ngIf="isLoggedIn"><a routerLink="/home">Home</a></li>
+    <li *ngIf="isLoggedIn"><a routerLink="/open-account">Open Account</a></li>
+    <li *ngIf="isLoggedIn"><a routerLink="/transactions">Transactions</a></li>
+    <li *ngIf="isLoggedIn"><a routerLink="/balance">Balance</a></li>
+    <li *ngIf="isLoggedIn"><a routerLink="/history">Transaction History</a></li>
+
+    
+    <li *ngIf="isLoggedIn">
+      Welcome, <strong>{{ username }}</strong
+      >!
+    </li>
+    <li *ngIf="isLoggedIn"><a href="#" (click)="logout()">Logout</a></li>
+  </ul>
+</nav>
+
+<!-- ใช้ router-outlet เพื่อแสดงคอนเทนต์ของแต่ละหน้า -->
+<router-outlet></router-outlet>
