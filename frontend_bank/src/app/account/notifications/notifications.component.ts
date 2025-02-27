@@ -17,7 +17,6 @@ export class NotificationsComponent implements OnInit {
     this.loadNotifications();
   }
 
-  // ฟังก์ชันเพื่อดึงการแจ้งเตือน
   loadNotifications(): void {
     this.notificationService.getNotifications().subscribe({
       next: (res) => {
@@ -30,7 +29,6 @@ export class NotificationsComponent implements OnInit {
     });
   }
 
-  // ฟังก์ชันในการทำเครื่องหมายว่าอ่านแล้ว
   markAsRead(notificationId: string): void {
     this.notificationService.markAsRead(notificationId).subscribe({
       next: () => {
@@ -42,7 +40,6 @@ export class NotificationsComponent implements OnInit {
     });
   }
 
-  // ฟังก์ชันในการลบการแจ้งเตือน
   deleteNotification(notificationId: string): void {
     this.notificationService.deleteNotification(notificationId).subscribe({
       next: () => {

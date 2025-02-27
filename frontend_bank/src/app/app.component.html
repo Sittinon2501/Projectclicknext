@@ -1,19 +1,46 @@
-<nav>
-  <ul>
-    <li *ngIf="!isLoggedIn"><a routerLink="/login">Login</a></li>
-    <li *ngIf="!isLoggedIn"><a routerLink="/register">Register</a></li>
-    <li *ngIf="isLoggedIn"><a routerLink="/home">Home</a></li>
-    <li *ngIf="isLoggedIn"><a routerLink="/transactions">Transactions</a></li>
-    <li *ngIf="isLoggedIn"><a routerLink="/dashboard">Profile</a></li>
+<!-- app.component.html -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Frontend Bank</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li *ngIf="!isLoggedIn" class="nav-item">
+          <a class="nav-link" routerLink="/login">Login</a>
+        </li>
+        <li *ngIf="!isLoggedIn" class="nav-item">
+          <a class="nav-link" routerLink="/register">Register</a>
+        </li>
+        <li *ngIf="isLoggedIn" class="nav-item">
+          <a class="nav-link" routerLink="/home">Home</a>
+        </li>
+        <li *ngIf="isLoggedIn" class="nav-item">
+          <a class="nav-link" routerLink="/transactions">Transactions</a>
+        </li>
 
+        <li *ngIf="isLoggedIn" class="nav-item">
+          <a class="nav-link" routerLink="/notifications">
+            <!-- ใช้ไอคอนซองจดหมาย -->
+            <i class="fas fa-envelope-open"></i> <!-- เปลี่ยนจาก fa-bell เป็น fa-envelope-open -->
+            <span *ngIf="unreadNotificationsCount > 0" class="badge bg-danger">{{ unreadNotificationsCount }}</span>
+          </a>
+        </li>
 
-    <li *ngIf="isLoggedIn">
-      Welcome, <strong>{{ username }}</strong
-      >!
-    </li>
-    <li *ngIf="isLoggedIn"><a href="#" (click)="logout()">Logout</a></li>
-  </ul>
+        <li *ngIf="isLoggedIn" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg" alt="Profile" class="profile-img">
+            Welcome, <strong>{{ username }}</strong>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" routerLink="/dashboard">Go to Dashboard</a></li>
+            <li><a class="dropdown-item" href="#" (click)="logout()">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
 </nav>
 
-<!-- ใช้ router-outlet เพื่อแสดงคอนเทนต์ของแต่ละหน้า -->
 <router-outlet></router-outlet>

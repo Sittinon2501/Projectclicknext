@@ -1,25 +1,79 @@
-nav {
-    background-color: #333;
-    padding: 10px;
+/* app.component.css */
+
+/* Style for profile image */
+.navbar .profile-img {
+  width: 30px; /* ขนาดของรูปโปรไฟล์ */
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+/* Style for notification icon and badge */
+.navbar .notification-icon {
+  position: relative;
+  cursor: pointer;
+}
+
+.navbar .notification-icon i {
+  font-size: 24px; /* ขนาดไอคอน */
+  color: #000;     /* สีของไอคอน */
+}
+
+.navbar .notification-icon .badge {
+  position: absolute;
+  top: -5px;         /* ปรับตำแหน่ง badge ให้อยู่บนขวาของไอคอน */
+  right: -5px;
+  background-color: red;  /* สีพื้นหลังของ badge */
+  color: white;          /* สีของตัวเลขใน badge */
+  border-radius: 50%;     /* ทำให้ badge เป็นวงกลม */
+  padding: 3px 8px;       /* ขนาดของ badge */
+  font-size: 14px;        /* ขนาดตัวเลขใน badge */
+}
+
+/* Style for notification dropdown */
+.notification-dropdown {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 200px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.notification-dropdown ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.notification-dropdown li {
+  margin-bottom: 10px;
+}
+
+.notification-dropdown button {
+  margin-top: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+/* Responsive design for small screens (max-width: 767px) */
+@media (max-width: 767px) {
+  .navbar .navbar-nav {
+    text-align: center; /* จัดให้ nav items อยู่ตรงกลางบนมือถือ */
   }
-  
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
+
+  /* ขนาดของไอคอนใน navbar สำหรับมือถือ */
+  .navbar .notification-icon i {
+    font-size: 20px;
   }
-  
-  li {
-    margin-right: 15px;
+
+  .navbar .profile-img {
+    width: 25px; /* ขนาดรูปโปรไฟล์เล็กลงบนมือถือ */
+    height: 25px;
   }
-  
-  a {
-    color: white;
-    text-decoration: none;
+
+  .navbar .navbar-toggler-icon {
+    background-color: #000; /* เปลี่ยนสีของ burger icon ให้ชัดขึ้น */
   }
-  
-  a:hover {
-    text-decoration: underline;
-  }
-  
+}

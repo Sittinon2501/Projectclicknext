@@ -18,9 +18,10 @@
     <tr *ngFor="let transaction of transactions">
       <td colspan="4" *ngIf="transaction.showDetails">
         <div>
-          <strong>Description:</strong> {{ transaction.description }}
+          <strong>Description:</strong> {{ transaction.description || 'No description provided' }}
         </div>
-        <div>
+        <!-- เงื่อนไขการแสดง Sender Account หรือ Recipient Account -->
+        <div *ngIf="transaction.type !== 'deposit' && transaction.type !== 'withdraw'">
           <strong>Sender Account:</strong> {{ transaction.senderAccountNumber }} ({{ transaction.senderAccountName }})
         </div>
         <!-- แสดง Recipient Account เฉพาะเมื่อมีข้อมูล -->
