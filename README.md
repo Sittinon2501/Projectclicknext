@@ -42,11 +42,14 @@
 - [Node.js]([https://nodejs.org/](https://nodejs.org/en))
 - [Docker]([https://www.docker.com/](https://www.docker.com/))
 
+## 📥 ดาวน์โหลด API Collection สำหรับ Postman
+สามารถดาวน์โหลดไฟล์ API Collection ได้ที่นี่ แล้วนำไป **Import ใน Postman**  
+📄 [Download API Collection (JSON)](https://raw.githubusercontent.com/Sittinon2501/Projectclicknext/main/Clicknext.postman_collection.json)
+
 ### **2️⃣ ดาวน์โหลดโปรเจกต์**
 ```sh
 git clone [https://github.com/your-repo/online-banking.git](https://github.com/Sittinon2501/Projectclicknext.git)
 cd frontend_bank แล้ว npm install แล้ว  ng serve เพื่อรันฝั่ง frontend
 แล้ว ใช้ docker-compose up เพื่อรัน backend+database 
-
-API POSTMAN 
+- ผมไม่แน่ใจว่า clone ไปแล้วใช้docker-compose up แล้วมันน่าจะ error nodemon หรือเปล่าใน backend
 
