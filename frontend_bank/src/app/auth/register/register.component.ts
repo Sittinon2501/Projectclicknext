@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-register',
   standalone: false,
@@ -13,7 +14,6 @@ export class RegisterComponent {
   accountName: string = '';
   accountType: string = 'savings';
   initialDeposit: number = 1000;
-  message: string = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -35,11 +35,23 @@ export class RegisterComponent {
         userData.initialDeposit
       )
       .subscribe({
-        next: (res) => {
-          this.router.navigate(['/login']);
+        next: () => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Registration Successful',
+            text: 'You can now log in!',
+            confirmButtonColor: '#6c5ce7',
+          }).then(() => {
+            this.router.navigate(['/login']);
+          });
         },
         error: (err) => {
-          this.message = 'Error registering user: ' + err.message;
+          Swal.fire({
+            icon: 'error',
+            title: 'Registration Failed',
+            text: err.message || 'Something went wrong. Please try again!',
+            confirmButtonColor: '#d33',
+          });
         },
       });
   }

@@ -17,55 +17,58 @@
 </div>
 
 <!-- ฟอร์มการทำรายการ -->
+<!-- ฟอร์มการทำรายการ: Deposit -->
 <div *ngIf="transactionType === 'deposit'" class="fintech-card">
   <form (submit)="deposit()">
     <div class="form-group">
       <label><i class="bi bi-person-circle me-2"></i>Your Account Number</label>
-      <input type="text" [(ngModel)]="accountNumber" class="form-control" placeholder="Your Account Number" required />
+      <input type="text" [(ngModel)]="accountNumber" name="accountNumber" class="form-control" placeholder="Your Account Number" required />
     </div>
     <div class="form-group">
       <label><i class="bi bi-cash-stack me-2"></i>Amount</label>
-      <input type="number" [(ngModel)]="amount" class="form-control" placeholder="Amount" required />
+      <input type="number" [(ngModel)]="amount" name="amount" class="form-control" placeholder="Amount" required />
     </div>
     <div class="form-group">
       <label><i class="bi bi-chat-left-text me-2"></i>Description (optional)</label>
-      <textarea [(ngModel)]="description" class="form-control" placeholder="Description (optional)"></textarea>
+      <textarea [(ngModel)]="description" name="description" class="form-control" placeholder="Description (optional)"></textarea>
     </div>
     <button type="submit" class="btn btn-success">Deposit</button>
   </form>
 </div>
 
+<!-- ฟอร์มการทำรายการ: Withdraw -->
 <div *ngIf="transactionType === 'withdraw'" class="fintech-card">
   <form (submit)="withdraw()">
     <div class="form-group">
       <label><i class="bi bi-person-circle me-2"></i>Your Account Number</label>
-      <input type="text" [(ngModel)]="accountNumber" class="form-control" placeholder="Your Account Number" required />
+      <input type="text" [(ngModel)]="accountNumber" name="accountNumber" class="form-control" placeholder="Your Account Number" required />
     </div>
     <div class="form-group">
       <label><i class="bi bi-cash-stack me-2"></i>Amount</label>
-      <input type="number" [(ngModel)]="amount" class="form-control" placeholder="Amount" required />
+      <input type="number" [(ngModel)]="amount" name="amount" class="form-control" placeholder="Amount" required />
     </div>
     <div class="form-group">
       <label><i class="bi bi-chat-left-text me-2"></i>Description (optional)</label>
-      <textarea [(ngModel)]="description" class="form-control" placeholder="Description (optional)"></textarea>
+      <textarea [(ngModel)]="description" name="description" class="form-control" placeholder="Description (optional)"></textarea>
     </div>
     <button type="submit" class="btn btn-danger">Withdraw</button>
   </form>
 </div>
 
+<!-- ฟอร์มการทำรายการ: Transfer -->
 <div *ngIf="transactionType === 'transfer'" class="fintech-card">
   <form (submit)="transfer()">
     <div class="form-group">
       <label><i class="bi bi-person-plus me-2"></i>Recipient Account Number</label>
-      <input type="text" [(ngModel)]="recipientAccountNumber" class="form-control" placeholder="Recipient Account Number" required />
+      <input type="text" [(ngModel)]="recipientAccountNumber" name="recipientAccountNumber" class="form-control" placeholder="Recipient Account Number" required />
     </div>
     <div class="form-group">
       <label><i class="bi bi-cash-coin me-2"></i>Amount</label>
-      <input type="number" [(ngModel)]="amount" class="form-control" placeholder="Amount" required />
+      <input type="number" [(ngModel)]="amount" name="amount" class="form-control" placeholder="Amount" required />
     </div>
     <div class="form-group">
       <label><i class="bi bi-chat-left-text me-2"></i>Description (optional)</label>
-      <textarea [(ngModel)]="description" class="form-control" placeholder="Description (optional)"></textarea>
+      <textarea [(ngModel)]="description" name="description" class="form-control" placeholder="Description (optional)"></textarea>
     </div>
     <button type="submit" class="btn btn-primary">Transfer</button>
   </form>

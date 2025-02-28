@@ -43,13 +43,44 @@ h2 {
   transition: all 0.3s ease-in-out;
 }
 
+/* 🎨 เปลี่ยนสีกรอบเป็นฟ้าเมื่อถูกเลือก */
+.radio-option:has(input[type="radio"]:checked) {
+  border: 2px solid #6c5ce7;
+  box-shadow: 0 0 5px rgba(108, 92, 231, 0.6);
+}
+
+/* 🎨 Hover Effect */
 .radio-option:hover {
-  background-color: #f1f1f1;
+  background-color: #f8f9fa;
   border-color: #6c5ce7;
 }
 
+/* 🎨 ปรับขนาดของ radio button ให้เล็กลง */
 .radio-option input[type="radio"] {
-  margin-right: 8px;
+  appearance: none; /* ซ่อน radio button ดั้งเดิม */
+  width: 18px;
+  height: 18px;
+  border: 2px solid #6c5ce7;
+  border-radius: 50%;
+  outline: none;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* 🎨 ใส่วงกลมตรงกลางเมื่อเลือก */
+.radio-option input[type="radio"]:checked::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background-color: #6c5ce7;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* 🎨 Card Style */

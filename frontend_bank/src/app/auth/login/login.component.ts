@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2'; // ✅ Import SweetAlert2
 
 @Component({
   selector: 'app-login',
@@ -11,24 +12,37 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   username: string = '';
   password: string = '';
-  message: string = '';
+  showPassword: boolean = false; // ✅ ตัวแปรควบคุมการแสดงรหัสผ่าน
 
   constructor(private authService: AuthService, private router: Router) {}
 
   login() {
-    const credentials = {
-      username: this.username,
-      password: this.password
-    };
+    const credentials = { username: this.username, password: this.password };
 
     this.authService.login(credentials.username, credentials.password).subscribe({
-      next: (res) => {
-        // เมื่อล็อกอินสำเร็จ
-        this.router.navigate(['/home']);  // พาผู้ใช้ไปที่ Dashboard หรือหน้าอื่น ๆ
+      next: () => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Login Successful',
+          text: 'Welcome to Online Banking!',
+          timer: 2000,
+          showConfirmButton: false
+        });
+        this.router.navigate(['/home']);
       },
-      error: (err) => {
-        this.message = 'Invalid credentials or server error';
+      error: () => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Login Failed',
+          text: 'Invalid credentials or server error',
+          confirmButtonColor: '#ff7675'
+        });
       }
     });
+  }
+
+  // ✅ ฟังก์ชัน Toggle ดูรหัสผ่าน
+  togglePassword() {
+    this.showPassword = !this.showPassword;
   }
 }

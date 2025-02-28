@@ -1,8 +1,31 @@
-<h2>Login</h2>
-<form (submit)="login()">
-  <input type="text" [(ngModel)]="username" placeholder="Username" name="username" required />
-  <input type="password" [(ngModel)]="password" placeholder="Password" name="password" required />
-  <button type="submit">Login</button>
-</form>
+<!-- ✅ ใช้ .login-page เป็น Wrapper ให้ Login Component -->
+<div class="login-page">
+  <div class="box">
+    <span class="borderLine"></span>
+    <form (submit)="login()">
+      <h2>Sign in</h2>
+      <div class="inputBox">
+        <input type="text" [(ngModel)]="username" name="username" required />
+        <span>Username</span>
+        <i></i>
+      </div>
+      <div class="inputBox">
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          [(ngModel)]="password"
+          name="password"
+          required
+        />
+        <span>Password</span>
+        <i class="bi bi-eye" (click)="togglePassword()"></i>
+        <!-- 👁️ ปุ่มดูรหัสผ่าน -->
+      </div>
 
-<p>{{ message }}</p>
+      <div class="links">
+        <a href="#">Forgot Password</a>
+        <a routerLink="/register">Signup</a>
+      </div>
+      <button id="submit" type="submit">Login</button>
+    </form>
+  </div>
+</div>

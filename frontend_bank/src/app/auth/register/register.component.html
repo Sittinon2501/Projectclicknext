@@ -1,58 +1,42 @@
-<h2>Register</h2>
-<form (submit)="register()">
-  <div>
-    <label for="username">Username:</label>
-    <input
-      type="text"
-      [(ngModel)]="username"
-      placeholder="Username"
-      name="username"
-      required
-    />
+<div class="register-page">
+  <div class="box">
+    <span class="borderLine"></span>
+    <form (submit)="register()">
+      <h2>Register</h2>
+
+      <div class="inputBox">
+        <input type="text" [(ngModel)]="username" name="username" required />
+        <span>Username</span>
+        <i></i>
+      </div>
+
+      <div class="inputBox">
+        <input type="password" [(ngModel)]="password" name="password" required />
+        <span>Password</span>
+        <i></i>
+      </div>
+
+      <div class="inputBox">
+        <input type="text" [(ngModel)]="accountName" name="accountName" required />
+        <span>Account Name</span>
+        <i></i>
+      </div>
+
+      <div class="inputBox">
+        <select [(ngModel)]="accountType" name="accountType" required>
+          <option value="savings">Savings</option>
+        </select>
+        <span>Account Type</span>
+        <i></i>
+      </div>
+
+      <div class="inputBox">
+        <input type="number" [(ngModel)]="initialDeposit" name="initialDeposit" required />
+        <span>Initial Deposit</span>
+        <i></i>
+      </div>
+
+      <button type="submit" id="submit">Register</button>
+    </form>
   </div>
-
-  <div>
-    <label for="password">Password:</label>
-    <input
-      type="password"
-      [(ngModel)]="password"
-      placeholder="Password"
-      name="password"
-      required
-    />
-  </div>
-
-  <div>
-    <label for="accountName">Account Name:</label>
-    <input
-      type="text"
-      [(ngModel)]="accountName"
-      placeholder="Account Name"
-      name="accountName"
-      required
-    />
-  </div>
-
-  <div>
-    <label for="accountType">Account Type:</label>
-    <select [(ngModel)]="accountType" name="accountType" required>
-      <option value="savings">Savings</option>
-      <!-- You can add more account types here in the future -->
-    </select>
-  </div>
-
-  <div>
-    <label for="initialDeposit">Initial Deposit:</label>
-    <input
-      type="number"
-      [(ngModel)]="initialDeposit"
-      placeholder="Initial Deposit"
-      name="initialDeposit"
-      required
-    />
-  </div>
-
-  <button type="submit">Register</button>
-</form>
-
-<p>{{ message }}</p>
+</div>
