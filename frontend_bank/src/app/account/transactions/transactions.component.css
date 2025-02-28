@@ -1,39 +1,55 @@
-/* 🎨 ตั้งค่าทั่วไป */
-body {
-  font-family: 'Poppins', sans-serif;
-  background-color: #f8f9fa;
-  margin: 0;
-  padding: 0;
+/* 🎨 ตั้งค่า Background */
+.transactions-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+
+  /* 🎨 ใช้รูปพื้นหลัง */
+  background: url('https://wallpapershome.com/images/pages/pic_h/3430.jpg') no-repeat center center/cover;
+  
+  /* ใช้ Overlay เพื่อให้ BG มืดลงเล็กน้อย */
+  background-blend-mode: overlay;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* 🎨 หัวข้อหลัก */
 h2 {
   font-size: 2.2rem;
   font-weight: bold;
-  color: #343a40;
-  margin-bottom: 30px; /* เพิ่มระยะห่าง */
+  color: #fff; /* เปลี่ยนเป็นสีขาวให้มองเห็นชัด */
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 /* 🎨 Container สำหรับเลือกประเภทธุรกรรม */
 .transaction-type-container {
   display: flex;
   justify-content: center;
-  gap: 20px; /* เพิ่มระยะห่างระหว่างตัวเลือก */
-  margin-bottom: 40px; /* เพิ่มระยะห่างระหว่างประเภทและฟอร์ม */
+  gap: 20px;
+  margin-bottom: 40px;
   padding: 15px;
-  background-color: white;
+
+  /* Glassmorphism Effect */
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
 }
 
 /* 🎨 ปรับ Style ให้ Radio Buttons */
+/* 🎨 ปรับการจัดวางของ Radio Option */
 .radio-option {
   display: flex;
   align-items: center;
-  background-color: white;
+  justify-content: center; /* จัดให้อยู่กึ่งกลาง */
+  gap: 10px; /* เพิ่มระยะห่างระหว่างไอคอนกับ radio */
+  background: rgba(255, 255, 255, 0.3);
   border: 2px solid #dee2e6;
   border-radius: 8px;
   padding: 12px 18px;
@@ -41,6 +57,7 @@ h2 {
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+  backdrop-filter: blur(8px);
 }
 
 /* 🎨 เปลี่ยนสีกรอบเป็นฟ้าเมื่อถูกเลือก */
@@ -51,36 +68,8 @@ h2 {
 
 /* 🎨 Hover Effect */
 .radio-option:hover {
-  background-color: #f8f9fa;
+  background-color: rgba(255, 255, 255, 0.4);
   border-color: #6c5ce7;
-}
-
-/* 🎨 ปรับขนาดของ radio button ให้เล็กลง */
-.radio-option input[type="radio"] {
-  appearance: none; /* ซ่อน radio button ดั้งเดิม */
-  width: 18px;
-  height: 18px;
-  border: 2px solid #6c5ce7;
-  border-radius: 50%;
-  outline: none;
-  margin-right: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-/* 🎨 ใส่วงกลมตรงกลางเมื่อเลือก */
-.radio-option input[type="radio"]:checked::before {
-  content: "";
-  width: 10px;
-  height: 10px;
-  background-color: #6c5ce7;
-  border-radius: 50%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 /* 🎨 Card Style */
@@ -88,10 +77,15 @@ h2 {
   max-width: 600px;
   margin: 0 auto;
   padding: 25px;
-  background-color: white;
+
+  /* Glassmorphism Effect */
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
-  margin-bottom: 40px; /* เพิ่มระยะห่างระหว่างฟอร์ม */
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(15px);
+
+  margin-bottom: 40px;
   transition: transform 0.3s ease-in-out;
 }
 
@@ -101,22 +95,29 @@ h2 {
 
 /* 🎨 Form Elements */
 .form-group {
-  margin-bottom: 20px; /* เพิ่มระยะห่างระหว่างช่องฟอร์ม */
+  margin-bottom: 20px;
 }
 
 .form-group label {
   font-weight: 600;
   font-size: 1rem;
-  color: #495057;
+  color: #fff; /* เปลี่ยนเป็นสีขาวให้เข้ากับพื้นหลัง */
 }
 
 .form-control {
   border-radius: 8px;
-  border: 1px solid #ced4da;
+  border: 1px solid rgba(255, 255, 255, 0.4);
   padding: 12px;
   width: 100%;
   font-size: 1rem;
   transition: all 0.3s ease-in-out;
+  background: rgba(255, 255, 255, 0.3);
+  color: #fff; /* เปลี่ยนเป็นสีขาว */
+  backdrop-filter: blur(10px);
+}
+
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .form-control:focus {

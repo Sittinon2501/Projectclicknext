@@ -1,0 +1,138 @@
+/* 🎨 Background */
+.home-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background: url('https://wallpapershome.com/images/pages/pic_h/3430.jpg') no-repeat center center/cover;
+  background-blend-mode: overlay;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow-y: auto; /* ให้เลื่อนลงได้ */
+  padding-bottom: 50px;
+}
+
+/* 🎨 Container */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 30px;
+  text-align: center;
+}
+
+/* 🏦 Welcome */
+.welcome-card, .features-section, .why-us, .testimonials, .faq-section, .cta-section {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  padding: 25px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  margin-bottom: 30px;
+}
+
+.welcome-card h2, .features-section h3, .why-us h3, .testimonials h3, .faq-section h3, .cta-section h3 {
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+/* 🎨 Feature Grid */
+.feature-grid, .why-grid, .testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.feature-card, .why-card, .testimonial-card {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+.feature-card:hover, .why-card:hover, .testimonial-card:hover {
+  transform: translateY(-5px);
+}
+
+.feature-card i, .why-card i {
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.feature-card h4, .why-card h4, .testimonial-card span {
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+.feature-card p, .why-card p, .testimonial-card p, .faq-section p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+}
+
+/* 🎨 CTA Section */
+.cta-section .btn {
+  margin: 10px;
+  font-size: 1rem;
+  padding: 12px 20px;
+  border-radius: 10px;
+}
+
+/* 🎨 Responsive */
+@media (max-width: 768px) {
+  .feature-grid, .why-grid, .testimonial-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* 🎨 ทำให้ Feature Cards คลิกได้ */
+.feature-card {
+    cursor: pointer;
+    position: relative; /* ให้ Border Animation อยู่ในกรอบ */
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    border-radius: 15px;
+    border: 2px solid transparent;
+  }
+  
+  /* 🎨 เพิ่มเอฟเฟกต์ hover ให้เหมือนปุ่ม */
+  .feature-card:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-5px);
+  }
+  
+  /* 🎨 Border Animation (ใช้โทนสี Fintech) */
+  .feature-card::after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    border-radius: 15px;
+    border: 2px solid transparent;
+    
+    /* ใช้ Gradient สีโทน Fintech */
+    background: linear-gradient(120deg, #6c5ce7, #00b894, #a29bfe, #6c5ce7);
+    
+    background-size: 300% 300%;
+    animation: borderAnimation 2s linear infinite;
+    z-index: -1; /* ให้ Border อยู่ด้านหลังการ์ด */
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  /* 🎨 แสดง Border Animation เมื่อ Hover */
+  .feature-card:hover::after {
+    opacity: 1;
+  }
+  
+  /* 🎨 Keyframe สำหรับ Border Animation */
+  @keyframes borderAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
