@@ -106,6 +106,18 @@
   justify-content: center;
   align-items: center;
   animation: fadeIn 0.3s ease-in-out;
+  visibility: visible; /* ทำให้ Modal มองเห็น */
+}
+
+/* 🎨 ปรับ Modal Content */
+.modal-dialog {
+  width: 400px;
+  max-width: 90%;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.3s ease-in-out;
+  position: relative;
 }
 
 /* 🎨 Modal Header */
@@ -124,6 +136,85 @@
   font-size: 16px;
   color: #333;
   line-height: 1.5;
+  visibility: visible !important; /* ทำให้ข้อความแสดง */
+}
+
+/* 🎨 ปุ่มปิด Modal */
+.modal-body button {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  background-color: #ff7675;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.modal-body button:hover {
+  background-color: #e0565a;
+}
+
+/* 🎨 ฟิลเตอร์เลือกเดือน */
+.filter-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* ระยะห่างระหว่าง Label และ Dropdown */
+  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.filter-section:hover {
+  transform: scale(1.02);
+}
+
+/* 🎨 Dropdown สำหรับฟิลเตอร์ */
+.fintech-dropdown {
+  width: 220px;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: white;
+  border: 2px solid #6c5ce7;
+  color: #6c5ce7;
+  transition: all 0.3s ease-in-out;
+  text-align: center;
+}
+
+.fintech-dropdown:focus {
+  border-color: #00b894;
+  box-shadow: 0 0 10px rgba(0, 184, 148, 0.4);
+}
+
+/* 🎨 ปรับสีให้เข้ากับธีม
+.fintech-text {
+  color: #6c5ce7;
+  font-weight: bold;
+  font-size: 1rem;
+} */
+
+/* 🎨 หัวข้อ Transaction History */
+.transaction-title {
+  font-size: 2rem; /* ปรับให้ตัวใหญ่ขึ้น */
+  font-weight: bold;
+  color: #6c5ce7; /* ใช้สีม่วงของ Fintech */
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* เพิ่มเงาให้อ่านง่ายขึ้น */
+  transition: transform 0.3s ease-in-out;
+}
+
+.transaction-title:hover {
+  transform: scale(1.05); /* ขยายเล็กน้อยเมื่อ Hover */
 }
 
 /* 🎨 Smooth Animations */

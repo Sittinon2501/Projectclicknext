@@ -1,9 +1,18 @@
 <div class="container mt-5">
-  <h3 class="text-center mb-4 fintech-text">
+  <h3 class="transaction-title">
     <i class="bi bi-clock-history me-2"></i>Transaction History
   </h3>
+  
+  <!-- 🎯 ฟิลเตอร์เลือกเดือน -->
+  <div class="filter-section">
+    <label for="monthFilter" class="me-2 fintech-text">Filter by Month:</label>
+    <select id="monthFilter" class="form-select fintech-dropdown" [(ngModel)]="selectedMonth" (change)="applyFilter()">
+      <option value="">All</option>
+      <option *ngFor="let month of months" [value]="month.value">{{ month.label }}</option>
+    </select>
+  </div>
 
-  <div *ngIf="transactions.length > 0" class="table-responsive fintech-card">
+  <div *ngIf="filteredTransactions.length > 0" class="table-responsive fintech-card mt-3">
     <table class="table fintech-table">
       <thead>
         <tr>
@@ -14,8 +23,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let transaction of transactions" class="fintech-table-row">
-          <td>{{ transaction.type }}</td> <!-- เปลี่ยนเป็นสีดำปกติ -->
+        <tr *ngFor="let transaction of filteredTransactions" class="fintech-table-row">
+          <td>{{ transaction.type }}</td>
           <td [ngClass]="{
             'text-success': transaction.type === 'deposit' || transaction.type === 'transfer in',
             'text-danger': transaction.type === 'withdraw' || transaction.type === 'transfer out'
@@ -37,8 +46,7 @@
     </table>
   </div>
 
-  <!-- Display message if exists -->
-  <p *ngIf="message" class="alert fintech-alert mt-3">{{ message }}</p>
+  <p *ngIf="filteredTransactions.length === 0" class="alert fintech-alert mt-3">No transactions found for this month.</p>
 
   <!-- Modal for Transaction Details -->
   <div *ngIf="selectedTransaction" class="modal-backdrop fintech-modal" (click)="closeModal()">
