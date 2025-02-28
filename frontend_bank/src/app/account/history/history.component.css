@@ -1,140 +1,138 @@
-/* Table customizations */
-.table {
-    font-size: 16px;
-  }
-  
-  .table th, .table td {
-    text-align: center;
-  }
-  
-  .table th {
-    background-color: #343a40; /* Dark background for table header */
-    color: white;
-  }
-  
-  .table td {
-    background-color: #f8f9fa; /* Light background for table rows */
-  }
-  
-  /* Table row hover effect */
-  .table tr:hover {
-    background-color: #f1f1f1;
-    cursor: pointer;
-  }
-  
-  /* Button style for Show/Hide details */
-  button.btn-info {
-    background-color: #007bff;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-  }
-  
-  button.btn-info:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Active button when details are shown */
-  button.btn-info.btn-active {
-    background-color: #28a745;
-  }
-  
-  button.btn-info.btn-active:hover {
-    background-color: #218838;
-  }
-  
-  /* Modal backdrop */
-  .modal-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7); /* Darker backdrop */
-    z-index: 1050;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    animation: fadeIn 0.3s ease-in-out; /* Smooth fade-in effect */
-  }
-  
-  /* Modal dialog */
-  .modal-dialog {
-    max-width: 600px;
-    margin: 20px auto;
-    border-radius: 10px;
-    animation: slideIn 0.3s ease-out;
-  }
-  
-  /* Modal content */
-  .modal-content {
-    border-radius: 10px;
-    border: none;
-    background: linear-gradient(145deg, #ffffff, #f1f1f1);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
-    overflow: hidden;
-  }
-  
-  /* Modal header */
-  .modal-header {
-    background-color: #007bff;
-    color: white;
-    padding: 20px;
-    font-size: 1.25rem;
-    border-bottom: 2px solid #0056b3;
-    text-align: center;
-  }
-  
-  /* Modal body */
-  .modal-body {
-    padding: 25px;
-    font-size: 16px;
-    color: #333;
-    line-height: 1.5;
-  }
-  
-  /* Modal body text */
-  .modal-body strong {
-    color: #007bff;
-  }
-  
-  /* Close button */
-  .modal-header .close {
-    font-size: 30px;
-    color: white;
-    opacity: 1;
-    cursor: pointer;
-    transition: opacity 0.2s ease;
-  }
-  
-  .modal-header .close:hover {
-    opacity: 0.7;
-  }
-  
-  /* Hover effect on the close button */
-  .modal-header .close:focus {
-    outline: none;
-  }
-  
-  /* Smooth animations */
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-  
-  @keyframes slideIn {
-    0% {
-      transform: translateY(-50px);
-      opacity: 0;
-    }
-    100% {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-  
+/* 🎨 ฟอนต์หลัก */
+* {
+  font-family: 'Poppins', sans-serif !important;
+}
+
+/* 🎨 Card Style */
+.fintech-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.fintech-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* 🎨 Table Style */
+.fintech-table {
+  font-size: 16px;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/* 🎨 Sticky Table Header */
+.fintech-table thead {
+  background-color: #6c5ce7;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* 🎨 Table Header */
+.fintech-table th {
+  background-color: #6c5ce7;
+  color: white;
+  padding: 12px;
+  text-align: center;
+  font-weight: bold;
+  border-bottom: 2px solid #4e44a0;
+}
+
+/* 🎨 Table Row */
+.fintech-table td {
+  background-color: #f8f9fa;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #dee2e6;
+  transition: background-color 0.3s ease-in-out, transform 0.2s;
+}
+
+/* 🎨 Table Row Hover Effect */
+.fintech-table-row:hover {
+  background-color: #e0e0e0 !important;
+  transform: scale(1.01);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* 🎨 สีตัวเลขยอดเงิน */
+.text-success {
+  color: #00b894 !important; /* เขียวสด */
+}
+
+.text-danger {
+  color: #ff7675 !important; /* แดงสด */
+}
+
+/* 🎨 ปุ่ม Show Details */
+.fintech-btn {
+  background-color: #17a2b8;
+  color: white;
+  border-radius: 8px;
+  padding: 5px 10px;
+  transition: background-color 0.3s;
+}
+
+.fintech-btn:hover {
+  background-color: #138496;
+}
+
+/* 🎨 Active Button */
+.fintech-btn.btn-active {
+  background-color: #28a745;
+}
+
+.fintech-btn.btn-active:hover {
+  background-color: #218838;
+}
+
+/* 🎨 Modal Backdrop */
+.fintech-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1050;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* 🎨 Modal Header */
+.modal-header {
+  background-color: #6c5ce7;
+  color: white;
+  padding: 20px;
+  font-size: 1.25rem;
+  border-bottom: 2px solid #4e44a0;
+  text-align: center;
+}
+
+/* 🎨 Modal Body */
+.modal-body {
+  padding: 25px;
+  font-size: 16px;
+  color: #333;
+  line-height: 1.5;
+}
+
+/* 🎨 Smooth Animations */
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes slideIn {
+  0% { transform: translateY(-50px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}

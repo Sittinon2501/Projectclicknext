@@ -1,13 +1,13 @@
-<!-- dashboard.component.html -->
-<div class="container mt-5">
-  <h2 class="text-center mb-4">Your Dashboard</h2>
+<!-- Dashboard Container -->
+<div class="container mt-5 p-4 fintech-bg shadow-lg rounded border" data-aos="fade-up">
+  <h2 class="text-center mb-4 fintech-text"><i class="bi bi-speedometer2 me-2"></i>Your Dashboard</h2>
 
   <!-- Your Bank Accounts Section -->
-  <div *ngIf="accounts.length > 0">
-    <h3>Your Bank Accounts</h3>
+  <div *ngIf="accounts.length > 0" class="fintech-card p-3" data-aos="fade-right">
+    <h3 class="fintech-text"><i class="bi bi-bank me-2"></i>Your Bank Accounts</h3>
     <div class="table-responsive">
-      <table class="table table-striped table-bordered">
-        <thead class="thead-dark">
+      <table class="table fintech-table">
+        <thead>
           <tr>
             <th>Account Number</th>
             <th>Account Name</th>
@@ -17,28 +17,32 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let account of accounts">
+          <tr *ngFor="let account of accounts" class="fintech-table-row" data-aos="fade-up">
             <td>{{ account.accountNumber }}</td>
             <td>{{ account.accountName }}</td>
             <td>{{ account.accountType }}</td>
-            <td>{{ account.balance | currency }}</td>
-            <td>{{ calculateAnnualInterest(account) | currency }}</td>
+            <td class="text-success">
+              <i class="bi bi-cash-stack me-1"></i>{{ account.balance | currency }}
+            </td>
+            <td class="text-success">
+              <i class="bi bi-graph-up-arrow me-1"></i>{{ calculateAnnualInterest(account) | currency }}
+            </td>
           </tr>
         </tbody>
-      </table>
+      </table>      
     </div>
   </div>
 
   <!-- Balance Section -->
-  <div class="my-4">
+  <div class="my-4 p-4 fintech-card app-balance" data-aos="zoom-in">
     <app-balance></app-balance>
   </div>
 
   <!-- History Section -->
-  <div>
+  <div class="p-4 fintech-card app-history" data-aos="fade-left">
     <app-history></app-history>
   </div>
 
   <!-- Message Display -->
-  <p *ngIf="message" class="alert alert-info mt-3">{{ message }}</p>
+  <p *ngIf="message" class="alert fintech-alert mt-3" data-aos="flip-up">{{ message }}</p>
 </div>

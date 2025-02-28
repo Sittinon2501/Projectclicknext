@@ -1,41 +1,63 @@
-<!-- app.component.html -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Frontend Bank</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm py-3 fixed-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold d-flex align-items-center" href="#">
+      <i class="bi bi-bank2 me-2"></i> Online Banking
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
+      <ul class="navbar-nav ms-auto align-items-center">
         <li *ngIf="!isLoggedIn" class="nav-item">
-          <a class="nav-link" routerLink="/login">Login</a>
+          <a class="nav-link text-dark" routerLink="/login">
+            <i class="bi bi-box-arrow-in-right me-1"></i> Login
+          </a>
         </li>
         <li *ngIf="!isLoggedIn" class="nav-item">
-          <a class="nav-link" routerLink="/register">Register</a>
-        </li>
-        <li *ngIf="isLoggedIn" class="nav-item">
-          <a class="nav-link" routerLink="/home">Home</a>
-        </li>
-        <li *ngIf="isLoggedIn" class="nav-item">
-          <a class="nav-link" routerLink="/transactions">Transactions</a>
-        </li>
-
-        <li *ngIf="isLoggedIn" class="nav-item">
-          <a class="nav-link" routerLink="/notifications">
-            <!-- ใช้ไอคอนซองจดหมาย -->
-            <i class="fas fa-envelope-open"></i> <!-- เปลี่ยนจาก fa-bell เป็น fa-envelope-open -->
-            <span *ngIf="unreadNotificationsCount > 0" class="badge bg-danger">{{ unreadNotificationsCount }}</span>
+          <a class="nav-link text-dark" routerLink="/register">
+            <i class="bi bi-person-plus me-1"></i> Register
           </a>
         </li>
 
+        <li *ngIf="isLoggedIn" class="nav-item">
+          <a class="nav-link text-dark" routerLink="/home">
+            <i class="bi bi-house-door me-1"></i> Home
+          </a>
+        </li>
+        <li *ngIf="isLoggedIn" class="nav-item">
+          <a class="nav-link text-dark" routerLink="/transactions">
+            <i class="bi bi-receipt me-1"></i> Transactions
+          </a>
+        </li>
+
+        <!-- Notifications -->
+<li *ngIf="isLoggedIn" class="nav-item position-relative notification-icon">
+  <a class="nav-link text-dark position-relative" routerLink="/notifications">
+    <i class="bi bi-bell-fill notification-bell"></i> <!-- ตรวจสอบให้แน่ใจว่าใช้ไอคอนถูกต้อง -->
+    <span *ngIf="unreadNotificationsCount > 0" 
+      class="badge rounded-pill bg-danger position-absolute top-0 start-100 translate-middle">
+      {{ unreadNotificationsCount }}
+    </span>
+  </a>
+</li>
+
+
+        <!-- Profile Dropdown -->
         <li *ngIf="isLoggedIn" class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg" alt="Profile" class="profile-img">
-            Welcome, <strong>{{ username }}</strong>
+          <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdown" role="button" 
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg" 
+              alt="Profile" class="profile-img me-2">
+            <strong>{{ username }}</strong>
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" routerLink="/dashboard">Go to Dashboard</a></li>
-            <li><a class="dropdown-item" href="#" (click)="logout()">Logout</a></li>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" routerLink="/dashboard">
+              <i class="bi bi-speedometer2 me-1"></i> Go to Dashboard</a></li>
+            <li><a class="dropdown-item text-danger" href="#" (click)="logout()">
+              <i class="bi bi-box-arrow-right me-1"></i> Logout</a></li>
           </ul>
         </li>
       </ul>
@@ -43,4 +65,7 @@
   </div>
 </nav>
 
-<router-outlet></router-outlet>
+<!-- ต้องเพิ่ม padding ด้านบนให้ container หลัก -->
+<div class="content">
+  <router-outlet></router-outlet>
+</div>

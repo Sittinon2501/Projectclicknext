@@ -1,75 +1,72 @@
 <h2 class="text-center my-4">Transactions</h2>
 
 <!-- เลือกประเภทการทำรายการ -->
-<div class="d-flex justify-content-center mb-4">
-  <label class="mr-3">
-    <input type="radio" name="transactionType" (change)="selectTransactionType('deposit')" checked /> 
-    <i class="bi bi-bank mr-2"></i> Deposit
+<div class="transaction-type-container">
+  <label class="radio-option">
+    <input type="radio" name="transactionType" (change)="selectTransactionType('deposit')" checked />
+    <i class="bi bi-bank me-2"></i> Deposit
   </label>
-  <label class="mr-3">
-    <input type="radio" name="transactionType" (change)="selectTransactionType('withdraw')" /> 
-    <i class="bi bi-cash mr-2"></i> Withdraw
+  <label class="radio-option">
+    <input type="radio" name="transactionType" (change)="selectTransactionType('withdraw')" />
+    <i class="bi bi-cash me-2"></i> Withdraw
   </label>
-  <label>
-    <input type="radio" name="transactionType" (change)="selectTransactionType('transfer')" /> 
-    <i class="bi bi-arrow-right-circle mr-2"></i> Transfer
+  <label class="radio-option">
+    <input type="radio" name="transactionType" (change)="selectTransactionType('transfer')" />
+    <i class="bi bi-arrow-right-circle me-2"></i> Transfer
   </label>
 </div>
 
 <!-- ฟอร์มการทำรายการ -->
-<div *ngIf="transactionType === 'deposit'" class="container">
-  <!-- Form สำหรับฝากเงิน -->
-  <form (submit)="deposit()" class="p-4 border rounded shadow-sm">
+<div *ngIf="transactionType === 'deposit'" class="fintech-card">
+  <form (submit)="deposit()">
     <div class="form-group">
-      <label for="accountNumberDeposit"><i class="bi bi-person-circle mr-2"></i>Your Account Number</label>
-      <input type="text" [(ngModel)]="accountNumber" name="accountNumberDeposit" class="form-control" placeholder="Your Account Number" required />
+      <label><i class="bi bi-person-circle me-2"></i>Your Account Number</label>
+      <input type="text" [(ngModel)]="accountNumber" class="form-control" placeholder="Your Account Number" required />
     </div>
     <div class="form-group">
-      <label for="amountDeposit"><i class="bi bi-cash-stack mr-2"></i>Amount</label>
-      <input type="number" [(ngModel)]="amount" name="amountDeposit" class="form-control" placeholder="Amount" required />
+      <label><i class="bi bi-cash-stack me-2"></i>Amount</label>
+      <input type="number" [(ngModel)]="amount" class="form-control" placeholder="Amount" required />
     </div>
     <div class="form-group">
-      <label for="description"><i class="bi bi-chat-left-text mr-2"></i>Description (optional)</label>
-      <textarea [(ngModel)]="description" name="description" class="form-control" placeholder="Description (optional)"></textarea>
+      <label><i class="bi bi-chat-left-text me-2"></i>Description (optional)</label>
+      <textarea [(ngModel)]="description" class="form-control" placeholder="Description (optional)"></textarea>
     </div>
-    <button type="submit" class="btn btn-success btn-block">Deposit</button>
+    <button type="submit" class="btn btn-success">Deposit</button>
   </form>
 </div>
 
-<div *ngIf="transactionType === 'withdraw'" class="container">
-  <!-- Form สำหรับถอนเงิน -->
-  <form (submit)="withdraw()" class="p-4 border rounded shadow-sm">
+<div *ngIf="transactionType === 'withdraw'" class="fintech-card">
+  <form (submit)="withdraw()">
     <div class="form-group">
-      <label for="accountNumberWithdraw"><i class="bi bi-person-circle mr-2"></i>Your Account Number</label>
-      <input type="text" [(ngModel)]="accountNumber" name="accountNumberWithdraw" class="form-control" placeholder="Your Account Number" required />
+      <label><i class="bi bi-person-circle me-2"></i>Your Account Number</label>
+      <input type="text" [(ngModel)]="accountNumber" class="form-control" placeholder="Your Account Number" required />
     </div>
     <div class="form-group">
-      <label for="amountWithdraw"><i class="bi bi-cash-stack mr-2"></i>Amount</label>
-      <input type="number" [(ngModel)]="amount" name="amountWithdraw" class="form-control" placeholder="Amount" required />
+      <label><i class="bi bi-cash-stack me-2"></i>Amount</label>
+      <input type="number" [(ngModel)]="amount" class="form-control" placeholder="Amount" required />
     </div>
     <div class="form-group">
-      <label for="description"><i class="bi bi-chat-left-text mr-2"></i>Description (optional)</label>
-      <textarea [(ngModel)]="description" name="description" class="form-control" placeholder="Description (optional)"></textarea>
+      <label><i class="bi bi-chat-left-text me-2"></i>Description (optional)</label>
+      <textarea [(ngModel)]="description" class="form-control" placeholder="Description (optional)"></textarea>
     </div>
-    <button type="submit" class="btn btn-danger btn-block">Withdraw</button>
+    <button type="submit" class="btn btn-danger">Withdraw</button>
   </form>
 </div>
 
-<div *ngIf="transactionType === 'transfer'" class="container">
-  <!-- Form สำหรับโอนเงิน -->
-  <form (submit)="transfer()" class="p-4 border rounded shadow-sm">
+<div *ngIf="transactionType === 'transfer'" class="fintech-card">
+  <form (submit)="transfer()">
     <div class="form-group">
-      <label for="recipientAccountNumber"><i class="bi bi-person-plus mr-2"></i>Recipient Account Number</label>
-      <input type="text" [(ngModel)]="recipientAccountNumber" name="recipientAccountNumber" class="form-control" placeholder="Recipient Account Number" required />
+      <label><i class="bi bi-person-plus me-2"></i>Recipient Account Number</label>
+      <input type="text" [(ngModel)]="recipientAccountNumber" class="form-control" placeholder="Recipient Account Number" required />
     </div>
     <div class="form-group">
-      <label for="amountTransfer"><i class="bi bi-cash-coin mr-2"></i>Amount</label>
-      <input type="number" [(ngModel)]="amount" name="amountTransfer" class="form-control" placeholder="Amount" required />
+      <label><i class="bi bi-cash-coin me-2"></i>Amount</label>
+      <input type="number" [(ngModel)]="amount" class="form-control" placeholder="Amount" required />
     </div>
     <div class="form-group">
-      <label for="description"><i class="bi bi-chat-left-text mr-2"></i>Description (optional)</label>
-      <textarea [(ngModel)]="description" name="description" class="form-control" placeholder="Description (optional)"></textarea>
+      <label><i class="bi bi-chat-left-text me-2"></i>Description (optional)</label>
+      <textarea [(ngModel)]="description" class="form-control" placeholder="Description (optional)"></textarea>
     </div>
-    <button type="submit" class="btn btn-primary btn-block">Transfer</button>
+    <button type="submit" class="btn btn-primary">Transfer</button>
   </form>
 </div>

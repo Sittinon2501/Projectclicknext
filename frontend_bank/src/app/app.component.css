@@ -1,98 +1,75 @@
-/* app.component.css */
+/* 🎨 Navbar Style */
+.navbar {
+  padding: 12px 0;
+}
 
-/* Style for profile image */
-.navbar .profile-img {
-  width: 35px; /* ขนาดของรูปโปรไฟล์ */
+/* 🎨 Profile Image */
+.profile-img {
+  width: 35px;
   height: 35px;
   border-radius: 50%;
-  margin-right: 8px;
 }
 
-/* Style for notification icon and badge */
-.navbar .notification-icon {
+/* 🎨 Notification Bell */
+.notification-icon {
   position: relative;
-  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.navbar .notification-icon i {
-  font-size: 24px; /* ขนาดไอคอน */
-  color: #000;     /* สีของไอคอน */
+/* 🎨 ป้องกันไอคอนหาย */
+.notification-bell {
+  font-size: 22px !important; /* ปรับขนาด */
+  color: #333 !important; /* สีไอคอน */
+  display: inline-block !important; /* ให้แน่ใจว่าแสดงผล */
 }
 
-.navbar .notification-icon .badge {
+/* 🎨 แสดง Badge ของ Notification */
+.notification-icon .badge {
   position: absolute;
-  top: -5px;         /* ปรับตำแหน่ง badge ให้อยู่บนขวาของไอคอน */
+  top: -5px;
   right: -5px;
-  background-color: red;  /* สีพื้นหลังของ badge */
-  color: white;          /* สีของตัวเลขใน badge */
-  border-radius: 50%;     /* ทำให้ badge เป็นวงกลม */
-  padding: 3px 8px;       /* ขนาดของ badge */
-  font-size: 14px;        /* ขนาดตัวเลขใน badge */
-}
-
-/* Style for notification dropdown */
-.notification-dropdown {
-  position: absolute;
-  top: 40px; /* ปรับให้อยู่ใต้ไอคอน */
-  right: 0;
-  background-color: white;
-  border: 1px solid #ccc;
-  padding: 10px;
-  width: 220px; /* ขยายขนาด dropdown */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 8px; /* ทำให้มุมของ dropdown โค้งมน */
-  display: none; /* ซ่อน dropdown เมื่อไม่ใช้งาน */
-}
-
-.notification-dropdown ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.notification-dropdown li {
-  margin-bottom: 12px;
-}
-
-.notification-dropdown button {
-  margin-top: 5px;
-  padding: 5px 10px;
-  background-color: #007bff;
+  background-color: red;
   color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  border-radius: 50%;
+  padding: 3px 6px;
+  font-size: 12px;
+  font-weight: bold;
+  z-index: 10; /* ให้ badge อยู่ด้านหน้า */
+  min-width: 18px; /* ป้องกันขนาด badge เล็กเกินไป */
+  text-align: center;
 }
 
-.notification-dropdown button:hover {
-  background-color: #0056b3;
+/* 🎨 ป้องกัน badge ซ่อน icon */
+.notification-icon a {
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
-/* Show dropdown when the notification icon is clicked */
-.navbar .notification-icon:hover .notification-dropdown {
-  display: block; /* แสดง dropdown เมื่อ hover หรือคลิกที่ไอคอน */
+/* 🎨 Hover Effect */
+.notification-icon:hover i {
+  color: #007bff;
 }
 
-/* Responsive design for small screens (max-width: 767px) */
+/* 🎨 Navbar Hover Effect */
+.navbar-nav .nav-link {
+  transition: color 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #007bff !important;
+}
+
+/* 🎨 Responsive */
 @media (max-width: 767px) {
-  .navbar .navbar-nav {
-    text-align: center; /* จัดให้ nav items อยู่ตรงกลางบนมือถือ */
-  }
-
   .navbar .notification-icon i {
-    font-size: 20px; /* ขนาดของไอคอนใน navbar สำหรับมือถือ */
+    font-size: 20px; /* ปรับขนาดเล็กลง */
   }
 
   .navbar .profile-img {
-    width: 30px; /* ขนาดรูปโปรไฟล์เล็กลงบนมือถือ */
+    width: 30px;
     height: 30px;
-  }
-
-  .navbar .navbar-toggler-icon {
-    background-color: #000; /* เปลี่ยนสีของ burger icon ให้ชัดขึ้น */
-  }
-
-  .notification-dropdown {
-    width: 90%; /* ทำให้ dropdown กว้างขึ้นบนมือถือ */
-    padding: 15px;
   }
 }

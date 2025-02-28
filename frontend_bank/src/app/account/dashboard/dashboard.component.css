@@ -1,45 +1,78 @@
-/* dashboard.component.css */
+/* 🎨 Background สีหลัก */
+.fintech-bg {
+  background-color: #f1f2f6 !important; /* เทาอ่อน */
+  padding: 20px;
+  border-radius: 12px;
+}
 
-/* Add custom styles to the table */
+/* 🎨 สีตัวอักษร */
+.fintech-text {
+  color: #6c5ce7 !important; /* ม่วง */
+  font-weight: 600;
+  text-align: center; 
+}
+
+/* 🎨 Card Style */
+.fintech-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow เบา ๆ */
+  transition: transform 0.3s ease-in-out;
+}
+
+
+
+/* 🎨 Table Style */
 .table {
-    font-size: 16px;
+  font-size: 16px;
+}
+
+.table th, .table td {
+  text-align: center;
+}
+
+.table th {
+  background-color: #6c5ce7; /* ม่วง */
+  color: white;
+}
+
+.table td {
+  background-color: #f8f9fa;
+}
+
+/* 🎨 Table Row Hover */
+.fintech-table-row:hover {
+  background-color: #e0e0e0 !important;
+}
+
+/* 🎨 Success & CTA Colors */
+.text-success {
+  color: #00b894 !important; /* เขียวสด */
+}
+
+/* 🎨 Sections */
+.app-history, .app-balance {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow */
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #fff;
+}
+
+/* 🎨 Alert Message */
+.fintech-alert {
+  background-color: #00b894; /* เขียวสด */
+  color: white;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* 🎨 Responsive */
+@media (max-width: 767px) {
+  .table {
+    font-size: 14px; /* ทำให้ font ของ table เล็กลงในมือถือ */
   }
-  
-  .table th, .table td {
-    text-align: center;
-  }
-  
-  .table th {
-    background-color: #343a40; /* Dark header for better readability */
-    color: white;
-  }
-  
-  .table td {
-    background-color: #f8f9fa;
-  }
-  
-  /* Add custom styles for the sections */
-  h3 {
-    color: #007bff;
-    font-weight: 600;
-  }
-  
-  .app-history, .app-balance {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for the app sections */
-    border-radius: 8px;
-    padding: 20px;
-    background-color: #fff;
-  }
-  
-  .alert-info {
-    font-size: 14px;
-    text-align: center;
-    border-radius: 5px;
-  }
-  
-  @media (max-width: 767px) {
-    .table {
-      font-size: 14px; /* Make the table font size smaller on small screens */
-    }
-  }
-  
+}

@@ -1,20 +1,39 @@
-/* balance.component.css */
+/* 🎨 ปรับพื้นหลังของ Card ให้เป็น Gradient แบบ Fintech */
+.balance-card {
+  background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+  color: white;
+  border-radius: 15px;
+  padding: 20px;
+  transition: all 0.3s ease-in-out;
+}
 
-/* กำหนดให้ card มีขอบมุมโค้ง */
-.card {
-    border-radius: 8px;
-  }
-  
-  /* ให้ข้อความยอดเงินมีการแสดงผลที่ชัดเจน */
-  .card-body p {
-    font-size: 1.25rem;
-    font-weight: 600;
-  }
-  
-  /* สำหรับการแสดงข้อความแจ้งเตือน */
-  .alert-info {
-    font-size: 16px;
-    text-align: center;
-    border-radius: 5px;
-  }
-  
+/* 🎨 เพิ่ม Effect เวลา Hover */
+.balance-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* 🎨 ปรับสีและขนาดของตัวเลขยอดเงิน */
+.fintech-balance {
+  color: #00b894 !important; /* ใช้สีเขียวสดเดิม */
+  font-weight: bold;
+  font-size: 2rem;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3); /* ใส่เงาเพื่อให้มองชัดขึ้น */
+}
+
+/* 🎨 สีตัวอักษรหลัก */
+.fintech-text {
+  color: #6c5ce7;
+  font-weight: bold;
+}
+
+/* 🎨 Alert Message */
+.fintech-alert {
+  background-color: #00b894;
+  color: white;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 14px;
+}

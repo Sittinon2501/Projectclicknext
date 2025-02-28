@@ -1,81 +1,96 @@
-/* Overall container */
+/* 🎨 Overall Container */
 .container {
-    max-width: 800px; /* Limit width to make it more centered */
-    margin: 0 auto; /* Center container horizontally */
-    padding: 20px; /* Add some padding to the container */
-    background-color: #f8f9fa; /* Light background for the container */
-    border-radius: 15px; /* Rounded corners for the container */
-    border: 2px solid #ccc; /* Light border around the container */
-    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
-    background-image: url('/path-to-your-image.jpg'); /* Optional: Add background image */
-    background-size: cover; /* Make sure the background covers the entire area */
-    background-position: center; /* Center the background image */
-  }
-  
-  /* Fade-in animation for each notification */
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-  
-  /* Apply the fade-in animation */
-  .fade-in {
-    animation: fadeIn 0.5s ease-in;
-  }
-  
-  /* Style for notification message */
-  .list-group-item {
-    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent background */
-    border: 1px solid #dee2e6; /* Light border */
-    border-radius: 10px; /* Rounded corners */
-    margin-bottom: 15px; /* Space between notifications */
-    padding: 15px;
-    transition: transform 0.2s ease;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
-  }
-  
-  /* Style for read notifications */
-  .text-muted {
-    color: #6c757d !important; /* Muted color for read notifications */
-  }
-  
-  /* Hover effect on notification items */
-  .list-group-item:hover {
-    background-color: #f1f1f1;
-    transform: scale(1.02); /* Slightly increase size on hover */
-  }
-  
-  /* Success button - Mark as Read */
-  .btn-success {
-    transition: background-color 0.3s ease;
-  }
-  
-  .btn-success:hover {
-    background-color: #218838;
-  }
-  
-  /* Delete button */
-  .btn-danger {
-    transition: background-color 0.3s ease;
-  }
-  
-  .btn-danger:hover {
-    background-color: #c82333;
-  }
-  
-  /* No notifications text */
-  .alert-info {
-    font-size: 1.1rem;
-    font-weight: 500;
-    padding: 10px;
-  }
-  
-  /* Message alert */
-  .alert {
-    margin-top: 20px;
-  }
-  
+  max-width: 850px; /* ขยายขนาดให้ใหญ่ขึ้น */
+  margin: 0 auto; /* จัดให้อยู่ตรงกลาง */
+  padding: 30px; /* เพิ่ม Padding */
+  background-color: rgba(248, 249, 250, 0.95); /* เทาอ่อนโปร่งแสง */
+  border-radius: 20px; /* ทำให้ขอบมนขึ้น */
+  border: 1.5px solid #ccc; /* ขอบบางลง */
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.12); /* เพิ่มเงาให้มีมิติ */
+  backdrop-filter: blur(10px); /* ทำให้พื้นหลังดูโปร่ง */
+  background-image: url('/path-to-your-image.jpg'); /* ถ้าต้องการเพิ่ม BG */
+  background-size: cover;
+  background-position: center;
+}
+
+/* 🎨 Fade-in Animation */
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(-10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Apply Fade-in Animation */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+/* 🎨 List Group - Notification Box */
+.list-group {
+  padding: 0;
+  margin: 0;
+}
+
+/* 🎨 Notification Item */
+.list-group-item {
+  background-color: rgba(255, 255, 255, 0.95); /* สีขาวโปร่งใส */
+  border: 1px solid #dee2e6;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  padding: 18px; /* เพิ่ม Padding ให้ดูไม่แน่น */
+  transition: transform 0.2s ease, background-color 0.3s ease;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* เพิ่มความลึก */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 🎨 Hover Effect */
+.list-group-item:hover {
+  background-color: #f9f9f9;
+  transform: scale(1.02);
+  cursor: pointer;
+}
+
+/* 🎨 Read Notifications */
+.text-muted {
+  color: #6c757d !important; /* สีเทาอ่อน */
+}
+
+/* 🎨 Success Button - Mark as Read */
+.btn-success {
+  background-color: #00b894;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-success:hover {
+  background-color: #00976c;
+}
+
+/* 🎨 Danger Button - Delete */
+.btn-danger {
+  background-color: #ff7675;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-danger:hover {
+  background-color: #e0565a;
+}
+
+/* 🎨 Alert Message */
+.alert-info {
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 12px;
+  border-radius: 10px;
+  background-color: rgba(220, 214, 247, 0.9); /* สีม่วงบาง */
+  color: #6c5ce7;
+  text-align: center;
+}
+
+/* 🎨 Alert Box */
+.alert {
+  margin-top: 20px;
+  border-radius: 12px;
+}

@@ -1,10 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
-/* styles.css (global styles for the app) */
+/* ป้องกัน navbar ทับเนื้อหา */
 body {
-    background: linear-gradient(135deg, #ff7e5f, #feb47b); /* Orange gradient background */
-    background-size: cover; /* Make sure the background covers the entire page */
-    background-position: center;
-    height: 100vh; /* Ensure full screen height */
-    margin: 0;
-  }
-  
+  padding-top: 10px; /* ปรับขนาดให้เท่ากับ navbar */
+  font-family: 'Poppins', sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+
+/* หรือใช้ class กับ div หลัก */
+.content {
+  padding-top: 80px; /* ต้องเท่ากับความสูงของ navbar */
+}
+/* 🎨 ใช้ฟอนต์เดียวกันกับทุก HTML Tag */
+* {
+  font-family: 'Poppins', sans-serif !important;
+}
+/* 🎨 ฟอนต์หลักของระบบ (ครอบคลุมทุก Component) */
+
+
+/* 🎨 หัวข้อหลัก ใช้ฟอนต์หรู */
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+}
