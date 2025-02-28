@@ -1,0 +1,394 @@
+{
+	"info": {
+		"_postman_id": "ad79b3eb-f52a-408a-ae41-554d1c13469e",
+		"name": "Clicknext",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38958503"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"testuser1\",\r\n  \"password\": \"1234\",\r\n  \"accountName\": \"Test Account\",\r\n  \"accountType\": \"savings\",\r\n  \"initialDeposit\": 10000\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"testuser\",\r\n  \"password\": \"1234\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deposit",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmUyZWFkMC1hYWY5LTQ4YWItOGQ2OC1hNjYxNTJkMjc4MTMiLCJ1c2VybmFtZSI6InRlc3R1c2VyMSIsImlhdCI6MTc0MDU4NTM2NCwiZXhwIjoxNzQwNTg4OTY0fQ.zwCEWoJGHI8GLmmtoxISe3lcl9qW3qOFNaUHJ0O8vzs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"recipientAccountNumber\": \"1234567890\",\r\n  \"amount\": 1000,\r\n  \"description\": \"Payment for goods\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/transaction/deposit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"transaction",
+						"deposit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "withdraw",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmUyZWFkMC1hYWY5LTQ4YWItOGQ2OC1hNjYxNTJkMjc4MTMiLCJ1c2VybmFtZSI6InRlc3R1c2VyMSIsImlhdCI6MTc0MDU4NTM2NCwiZXhwIjoxNzQwNTg4OTY0fQ.zwCEWoJGHI8GLmmtoxISe3lcl9qW3qOFNaUHJ0O8vzs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"accountId\": \"dfb7e2f6-0a81-4921-a113-ad29cb971810\",\r\n  \"amount\": 500\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/transaction/withdraw",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"transaction",
+						"withdraw"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "transfer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiNDZmZWJjYS05YzI3LTRkMDktODRhMi0wMGU0ZmRkMDc0YWEiLCJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaWF0IjoxNzQwNjcyNjcxLCJleHAiOjE3NDA2NzYyNzF9.C9TnP78LIfpHan-_c677AD8vPWxat6_oWHoO1ldU1og",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"recipientAccountNumber\": \"4251198845\",\r\n  \"amount\": 500 ,\r\n   \"description\": \"Payment for goods\"\r\n\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/transaction/transfer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"transaction",
+						"transfer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "transaction/history",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmUyZWFkMC1hYWY5LTQ4YWItOGQ2OC1hNjYxNTJkMjc4MTMiLCJ1c2VybmFtZSI6InRlc3R1c2VyMSIsImlhdCI6MTc0MDU4NjgyMCwiZXhwIjoxNzQwNTkwNDIwfQ.0PKgJUYsla-DU3JRD0ZP5FYvgXN5t_5CtplRsVizC08",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/transaction/history",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"transaction",
+						"history"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "transaction/balance",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzNjkyODYwOS0zNWZmLTQ5MzctYWNmMC1jOTZkMDg1MWY0YTQiLCJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaWF0IjoxNzQwNTg2ODY3LCJleHAiOjE3NDA1OTA0Njd9.glaoxKJ8stZ8g5tv5Dnqft5vjfkYF39AxH3_2N8_gro",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/transaction/balance",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"transaction",
+						"balance"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/notifications",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZTVmYWMyMi02MjQ2LTQ3OGMtODE4OS1jMGYwNjM3Nzk4NTciLCJ1c2VybmFtZSI6InRlc3R1c2VyMSIsImlhdCI6MTc0MDY3MzAzMywiZXhwIjoxNzQwNjc2NjMzfQ.lgJMouojYJsSCrBTumQY01NyNwPpMd4fVo0qdgYCdno",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/notifications",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"notifications"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/account/user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxOWI1OTFhNy00MDAwLTQyZDctYmI1MS1jM2Y5MjQ0YTYxNWIiLCJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaWF0IjoxNzQwNjU5Mzk5LCJleHAiOjE3NDA2NjI5OTl9.8oTtxUdaCMED6ePSCvRQJPeFUByMAFW7PA7v65wuw-U",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/account/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"account",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/transaction/history",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjQ2NzhkOC1iNWQ2LTQwY2QtOWQ4MS1kOWE5ZjU1YzY5NDMiLCJ1c2VybmFtZSI6InRlc3R1c2VyMiIsImlhdCI6MTc0MDY2ODM5MSwiZXhwIjoxNzQwNjcxOTkxfQ.0vf-kPWJ2e905avvNZP-fOhdIOQ9G-kjcHV1lyg5OF0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/transaction/history",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"transaction",
+						"history"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/notifications/f0789193-2e04-4ddb-bfe1-277c6b683161/read",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiNDZmZWJjYS05YzI3LTRkMDktODRhMi0wMGU0ZmRkMDc0YWEiLCJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaWF0IjoxNzQwNjczMzE3LCJleHAiOjE3NDA2NzY5MTd9.h5K3VqzyN-JjG3nonTr8Rcq_nLEFMsyzcAUxgpMsk1g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/notifications/f0789193-2e04-4ddb-bfe1-277c6b683161/read",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"notifications",
+						"f0789193-2e04-4ddb-bfe1-277c6b683161",
+						"read"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
