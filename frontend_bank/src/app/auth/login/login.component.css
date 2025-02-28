@@ -6,7 +6,7 @@
     height: 100vh;
 
     /* 🎨 ใส่ Background Image */
-    background: url('https://wallpapershome.com/images/pages/pic_h/3430.jpg') no-repeat center center/cover;
+    background: url('https://images.pexels.com/photos/50987/money-card-business-credit-card-50987.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center/cover;
     
     /* หรือใช้ Linear Gradient ทับบางส่วน */
     background-blend-mode: overlay;

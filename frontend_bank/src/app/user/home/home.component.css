@@ -3,12 +3,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  flex-direction: column;
+  height: auto; /* ให้ปรับตามเนื้อหา */
   width: 100vw;
-  background: url('https://wallpapershome.com/images/pages/pic_h/3430.jpg') no-repeat center center/cover;
+  background: url('https://images.pexels.com/photos/50987/money-card-business-credit-card-50987.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center/cover;
   background-blend-mode: overlay;
   background-color: rgba(0, 0, 0, 0.5);
   overflow-y: auto; /* ให้เลื่อนลงได้ */
+  padding-top: 8px; /* ✅ เพิ่มระยะห่างให้ Navbar ไม่ทับ */
   padding-bottom: 50px;
 }
 

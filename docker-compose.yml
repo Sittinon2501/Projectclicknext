@@ -24,24 +24,24 @@ services:
     env_file:
       - ./backend_bank/.env
     volumes:
-      - ./backend_bank:/app        # เชื่อมโฟลเดอร์ backend จากเครื่องโฮสต์ไปยัง container
-      - /app/node_modules          # เชื่อม node_modules ที่ติดตั้งภายใน container
-    command: npm run dev            # ใช้คำสั่ง dev เพื่อรองรับ hot-reloading
+      - ./backend_bank:/app
+      - /app/node_modules
+    command: npm run dev
 
-  frontend:
-    build: ./frontend_bank
-    container_name: frontend_banking
-    restart: always
-    depends_on:
-      - backend
-    ports:
-      - "4200:4200"
-    environment:
-      - API_URL=http://backend:5000/api
-    volumes:
-      - ./frontend_bank:/app       # เชื่อมโฟลเดอร์ frontend จากเครื่องโฮสต์ไปยัง container
-      - /app/node_modules          # เชื่อม node_modules ที่ติดตั้งภายใน container
-    command: npm start             # ใช้คำสั่ง start เพื่อรองรับ hot-reloading
+  # frontend:
+  #   build: ./frontend_bank
+  #   container_name: frontend_banking
+  #   restart: always
+  #   depends_on:
+  #     - backend
+  #   ports:
+  #     - "4200:4200"
+  #   environment:
+  #     - API_URL=http://backend:5000/api
+  #   volumes:
+  #     - ./frontend_bank:/app
+  #     - /app/node_modules
+  #   command: npm start
 
 volumes:
   mysql_data:

@@ -6,10 +6,10 @@
   <div class="card balance-card shadow-lg border-0">
     <div class="card-body text-center rounded-3">
       <div *ngIf="balance !== null">
-        <p class="h5">
-          <i class="bi bi-cash-stack me-2"></i>Your Balance:
+        <p class="h5"><i class="bi bi-cash-stack me-2"></i>Your Balance:</p>
+        <p class="fs-3 fintech-balance">
+          {{ balance | currency : "THB " : "symbol" }} บาท
         </p>
-        <p class="fs-3 fintech-balance">{{ balance | currency }}</p> 
       </div>
 
       <!-- Message Display -->

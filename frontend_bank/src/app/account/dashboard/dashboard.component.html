@@ -1,6 +1,8 @@
 <!-- Dashboard Container -->
 <div class="container mt-5 p-4 fintech-bg shadow-lg rounded border" data-aos="fade-up">
-  <h2 class="text-center mb-4 fintech-text"><i class="bi bi-speedometer2 me-2"></i>Your Banking Dashboard</h2>
+  <h2 class="text-center mb-4 fintech-text">
+    <i class="bi bi-speedometer2 me-2"></i>Your Banking Dashboard
+  </h2>
 
   <!-- Your Bank Accounts Section -->
   <div *ngIf="accounts.length > 0" class="fintech-card p-3" data-aos="fade-right">
@@ -22,10 +24,10 @@
             <td>{{ account.accountName }}</td>
             <td>{{ account.accountType }}</td>
             <td class="text-success">
-              <i class="bi bi-cash-stack me-1"></i>{{ account.balance | currency }}
+              <i class="bi bi-cash-stack me-1"></i>{{ account.balance | currency:'THB ' }} บาท
             </td>
             <td class="text-success">
-              <i class="bi bi-graph-up-arrow me-1"></i>{{ calculateAnnualInterest(account) | currency }}
+              <i class="bi bi-graph-up-arrow me-1"></i>{{ calculateAnnualInterest(account) | currency:'THB ' }} บาท
             </td>
           </tr>
         </tbody>

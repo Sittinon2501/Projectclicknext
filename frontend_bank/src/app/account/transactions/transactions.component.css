@@ -7,7 +7,7 @@
   width: 100vw;
 
   /* 🎨 ใช้รูปพื้นหลัง */
-  background: url('https://wallpapershome.com/images/pages/pic_h/3430.jpg') no-repeat center center/cover;
+  background: url('https://images.pexels.com/photos/50987/money-card-business-credit-card-50987.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center/cover;
   
   /* ใช้ Overlay เพื่อให้ BG มืดลงเล็กน้อย */
   background-blend-mode: overlay;

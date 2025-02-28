@@ -2,17 +2,27 @@
   <h3 class="transaction-title">
     <i class="bi bi-clock-history me-2"></i>Transaction History
   </h3>
-  
+
   <!-- 🎯 ฟิลเตอร์เลือกเดือน -->
   <div class="filter-section">
     <label for="monthFilter" class="me-2 fintech-text">Filter by Month:</label>
-    <select id="monthFilter" class="form-select fintech-dropdown" [(ngModel)]="selectedMonth" (change)="applyFilter()">
+    <select
+      id="monthFilter"
+      class="form-select fintech-dropdown"
+      [(ngModel)]="selectedMonth"
+      (change)="applyFilter()"
+    >
       <option value="">All</option>
-      <option *ngFor="let month of months" [value]="month.value">{{ month.label }}</option>
+      <option *ngFor="let month of months" [value]="month.value">
+        {{ month.label }}
+      </option>
     </select>
   </div>
 
-  <div *ngIf="filteredTransactions.length > 0" class="table-responsive fintech-card mt-3">
+  <div
+    *ngIf="filteredTransactions.length > 0"
+    class="table-responsive fintech-card mt-3"
+  >
     <table class="table fintech-table">
       <thead>
         <tr>
@@ -23,22 +33,49 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let transaction of filteredTransactions" class="fintech-table-row">
+        <tr
+          *ngFor="let transaction of filteredTransactions"
+          class="fintech-table-row"
+        >
           <td>{{ transaction.type }}</td>
-          <td [ngClass]="{
-            'text-success': transaction.type === 'deposit' || transaction.type === 'transfer in',
-            'text-danger': transaction.type === 'withdraw' || transaction.type === 'transfer out'
-          }">
-            <span *ngIf="transaction.type === 'deposit' || transaction.type === 'transfer in'">+ </span>
-            <span *ngIf="transaction.type === 'withdraw' || transaction.type === 'transfer out'">- </span>
-            {{ transaction.amount | currency }}
+          <td
+            [ngClass]="{
+              'text-success':
+                transaction.type === 'deposit' ||
+                transaction.type === 'transfer in',
+              'text-danger':
+                transaction.type === 'withdraw' ||
+                transaction.type === 'transfer out'
+            }"
+          >
+            <span
+              *ngIf="
+                transaction.type === 'deposit' ||
+                transaction.type === 'transfer in'
+              "
+              >+
+            </span>
+            <span
+              *ngIf="
+                transaction.type === 'withdraw' ||
+                transaction.type === 'transfer out'
+              "
+              >-
+            </span>
+            {{ transaction.amount | currency : "THB " }} บาท
           </td>
-          <td>{{ transaction.createdAt | date:'medium' }}</td>
+          <td>{{ transaction.createdAt | date : "medium" }}</td>
           <td>
-            <button class="btn btn-info btn-sm fintech-btn"
-              [ngClass]="{'btn-active': selectedTransaction === transaction}"
-              (click)="openModal(transaction)">
-              {{ selectedTransaction === transaction && transaction.showDetails ? 'Hide Details' : 'Show Details' }}
+            <button
+              class="btn btn-info btn-sm fintech-btn"
+              [ngClass]="{ 'btn-active': selectedTransaction === transaction }"
+              (click)="openModal(transaction)"
+            >
+              {{
+                selectedTransaction === transaction && transaction.showDetails
+                  ? "Hide Details"
+                  : "Show Details"
+              }}
             </button>
           </td>
         </tr>
@@ -46,22 +83,45 @@
     </table>
   </div>
 
-  <p *ngIf="filteredTransactions.length === 0" class="alert fintech-alert mt-3">No transactions found for this month.</p>
+  <p *ngIf="filteredTransactions.length === 0" class="alert fintech-alert mt-3">
+    No transactions found for this month.
+  </p>
 
   <!-- Modal for Transaction Details -->
-  <div *ngIf="selectedTransaction" class="modal-backdrop fintech-modal" (click)="closeModal()">
+  <div
+    *ngIf="selectedTransaction"
+    class="modal-backdrop fintech-modal"
+    (click)="closeModal()"
+  >
     <div class="modal-dialog" (click)="$event.stopPropagation()">
       <div class="modal-content fintech-card">
         <div class="modal-header">
           <h5 class="modal-title fintech-text">Transaction Details</h5>
         </div>
         <div class="modal-body">
-          <strong>Description:</strong> {{ selectedTransaction.description || 'No description provided' }}
-          <div *ngIf="selectedTransaction.type !== 'deposit' && selectedTransaction.type !== 'withdraw'">
-            <strong>Sender Account:</strong> {{ selectedTransaction.senderAccountNumber }} ({{ selectedTransaction.senderAccountName }})
+          <strong>Description:</strong>
+          {{ selectedTransaction.description || "No description provided" }}
+          <div
+            *ngIf="
+              selectedTransaction.type !== 'deposit' &&
+              selectedTransaction.type !== 'withdraw'
+            "
+          >
+            <strong>Sender Account:</strong>
+            {{ selectedTransaction.senderAccountNumber }} ({{
+              selectedTransaction.senderAccountName
+            }})
           </div>
-          <div *ngIf="selectedTransaction.recipientAccountNumber && selectedTransaction.recipientAccountName">
-            <strong>Recipient Account:</strong> {{ selectedTransaction.recipientAccountNumber }} ({{ selectedTransaction.recipientAccountName }})
+          <div
+            *ngIf="
+              selectedTransaction.recipientAccountNumber &&
+              selectedTransaction.recipientAccountName
+            "
+          >
+            <strong>Recipient Account:</strong>
+            {{ selectedTransaction.recipientAccountNumber }} ({{
+              selectedTransaction.recipientAccountName
+            }})
           </div>
         </div>
       </div>
