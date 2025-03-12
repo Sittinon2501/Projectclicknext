@@ -1,13 +1,20 @@
+# ใช้ Node.js เป็น Base Image
 FROM node:18
 
+# กำหนดโฟลเดอร์ทำงานใน Container
 WORKDIR /app
 
+# คัดลอก package.json และติดตั้ง dependencies
 COPY package*.json ./
 
-RUN npm install
+# ติดตั้ง nodemon เป็น global package
+RUN npm install 
 
+# คัดลอกโค้ดทั้งหมดเข้า Container
 COPY . .
 
+# เปิดพอร์ต 5000
 EXPOSE 5000
 
-CMD ["npm", "run", "dev"]  
+# รันเซิร์ฟเวอร์ด้วย nodemon
+CMD ["nodemon", "src/server.js"]

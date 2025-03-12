@@ -116,11 +116,12 @@ exports.transfer = async (req, res) => {
       description: description || "Transfer to another account", // ใช้คำอธิบายที่ส่งมา
     });
 
-    // บันทึกธุรกรรมของผู้รับ (transfer in) พร้อมคำอธิบาย
+    // บันทึกธุรกรรมของผู้รับ (transfer in) พร้อมคำอธิบาย และเพิ่ม recipientAccountId
     await Transaction.create({
       accountNumber: recipientAccount.accountNumber,
       type: "transfer in", // กำหนดเป็น 'transfer in'
       amount,
+      recipientAccountId: senderAccount.accountNumber, // เพิ่ม recipientAccountId ของผู้โอน
       description: description || "Transfer from another account", // ใช้คำอธิบายที่ส่งมา
     });
 
@@ -149,6 +150,7 @@ exports.transfer = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
 exports.viewBalance = async (req, res) => {
   try {
     // ดึง userId จาก Token
@@ -175,9 +177,7 @@ exports.transactionHistory = async (req, res) => {
     // ค้นหาบัญชีของผู้ใช้
     const account = await Account.findOne({ where: { userId } });
     if (!account) {
-      return res
-        .status(404)
-        .json({ message: "No account found for this user" });
+      return res.status(404).json({ message: "No account found for this user" });
     }
 
     // ค้นหาประวัติธุรกรรมของบัญชีนี้
@@ -201,25 +201,41 @@ exports.transactionHistory = async (req, res) => {
             })
           : null;
 
+        let senderInfo = {
+          senderAccountNumber: senderAccount ? senderAccount.accountNumber : "N/A",
+          senderAccountName: senderAccount ? senderAccount.accountName : "N/A",
+        };
+
+        let recipientInfo = {
+          recipientAccountNumber: recipientAccount ? recipientAccount.accountNumber : null,
+          recipientAccountName: recipientAccount ? recipientAccount.accountName : null,
+        };
+
+        // ถ้าเป็นประเภท 'transfer in' ให้สลับข้อมูล sender และ recipient
+        if (transaction.type === "transfer in") {
+          return {
+            ...transaction.dataValues,
+            senderAccountNumber: recipientInfo.recipientAccountNumber || "N/A",
+            senderAccountName: recipientInfo.recipientAccountName || "N/A",
+            recipientAccountNumber: senderInfo.senderAccountNumber || "N/A",
+            recipientAccountName: senderInfo.senderAccountName || "N/A",
+            description: transaction.description || "No description",
+          };
+        }
+
+        // ถ้าไม่ใช่ 'transfer in' แสดงข้อมูลตามปกติ
         return {
           ...transaction.dataValues,
-          senderAccountNumber: senderAccount
-            ? senderAccount.accountNumber
-            : "N/A",
-          senderAccountName: senderAccount ? senderAccount.accountName : "N/A",
-          // ตรวจสอบว่ามีข้อมูลผู้รับหรือไม่ ถ้าไม่มีจะไม่ส่งข้อมูล
-          recipientAccountNumber: recipientAccount
-            ? recipientAccount.accountNumber
-            : null, // ไม่แสดง recipientAccount ถ้าไม่มีข้อมูล
-          recipientAccountName: recipientAccount
-            ? recipientAccount.accountName
-            : null, // ไม่แสดง recipientAccount ถ้าไม่มีข้อมูล
+          senderAccountNumber: senderInfo.senderAccountNumber,
+          senderAccountName: senderInfo.senderAccountName,
+          recipientAccountNumber: recipientInfo.recipientAccountNumber,
+          recipientAccountName: recipientInfo.recipientAccountName,
           description: transaction.description || "No description",
         };
       })
     );
 
-    res.json({ transactions: transactionDetails });
+    res.Json({ transactions: transactionDetails }); 
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

@@ -1,12 +1,21 @@
 <!-- Dashboard Container -->
-<div class="container mt-5 p-4 fintech-bg shadow-lg rounded border" data-aos="fade-up">
+<div
+  class="container mt-5 p-4 fintech-bg shadow-lg rounded border"
+  data-aos="fade-up"
+>
   <h2 class="text-center mb-4 fintech-text">
     <i class="bi bi-speedometer2 me-2"></i>Your Banking Dashboard
   </h2>
 
   <!-- Your Bank Accounts Section -->
-  <div *ngIf="accounts.length > 0" class="fintech-card p-3" data-aos="fade-right">
-    <h3 class="fintech-text"><i class="bi bi-bank me-2"></i>Your Bank Accounts</h3>
+  <div
+    *ngIf="accounts.length > 0"
+    class="fintech-card p-3"
+    data-aos="fade-right"
+  >
+    <h3 class="fintech-text">
+      <i class="bi bi-bank me-2"></i>Your Bank Accounts
+    </h3>
     <div class="table-responsive">
       <table class="table fintech-table">
         <thead>
@@ -19,22 +28,27 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let account of accounts" class="fintech-table-row" data-aos="fade-up">
+          <tr
+            *ngFor="let account of accounts"
+            class="fintech-table-row"
+            data-aos="fade-up"
+          >
             <td>{{ account.accountNumber }}</td>
             <td>{{ account.accountName }}</td>
             <td>{{ account.accountType }}</td>
             <td class="text-success">
-              <i class="bi bi-cash-stack me-1"></i>{{ account.balance | currency:'THB ' }} บาท
+              <i class="bi bi-cash-stack me-1"></i
+              >{{ account.balance | currency : "THB " }} บาท
             </td>
             <td class="text-success">
-              <i class="bi bi-graph-up-arrow me-1"></i>{{ calculateAnnualInterest(account) | currency:'THB ' }} บาท
+              <i class="bi bi-graph-up-arrow me-1"></i
+              >{{ calculateAnnualInterest(account) | currency : "THB " }} บาท
             </td>
           </tr>
         </tbody>
-      </table>      
+      </table>
     </div>
   </div>
-
   <!-- Balance Section -->
   <div class="my-4 p-4 fintech-card app-balance" data-aos="zoom-in">
     <app-balance></app-balance>
@@ -46,5 +60,7 @@
   </div>
 
   <!-- Message Display -->
-  <p *ngIf="message" class="alert fintech-alert mt-3" data-aos="flip-up">{{ message }}</p>
+  <p *ngIf="message" class="alert fintech-alert mt-3" data-aos="flip-up">
+    {{ message }}
+  </p>
 </div>
